@@ -1,0 +1,13 @@
+50
+room1 3 3
+room2 3 3
+##start
+room3 3 3
+room4 3 3
+##end
+room5 3 3
+room6 3 3
+room1-room2
+room4-room5
+room2-room6
+room3-room4
