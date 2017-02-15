@@ -6,7 +6,7 @@
 /*   By: mhaziza <mhaziza@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/14 14:13:28 by mhaziza           #+#    #+#             */
-/*   Updated: 2017/02/14 21:21:44 by mhaziza          ###   ########.fr       */
+/*   Updated: 2017/02/15 18:27:11 by mhaziza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,17 @@ typedef struct	s_anthill
 	char **tubes;
 	int	**adjacency;
 }				t_anthill;
+
+typedef struct	s_bfs
+{
+	int	*deg;
+	int	*prev;
+	int	*mked;
+	int	*tmp;
+	int	*path;
+	int	s;
+	int	p;
+}				t_bfs;
 
 typedef struct	s_room
 {
@@ -50,4 +61,11 @@ int				get_id_room(char **ids, char *name);
 int				init_adjacency_map(t_anthill *ah);
 int				**set_adjacency(int **map, int id1, int id2);
 
+int				init(t_bfs *bfs, int size, t_anthill *ah);
+void			set_deg(t_bfs *bfs, int value, int id);
+void			set_prev(t_bfs *bfs, int id_prev, int id);
+void			set_mked(t_bfs *bfs, int value, int id);
+void			set_tmp(t_bfs *bfs, int value, int id);
+
+int				*bfs(t_anthill *ah);
 #endif

@@ -6,30 +6,16 @@
 /*   By: mhaziza <mhaziza@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/14 20:39:03 by mhaziza           #+#    #+#             */
-/*   Updated: 2017/02/14 21:41:27 by mhaziza          ###   ########.fr       */
+/*   Updated: 2017/02/15 18:03:16 by mhaziza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-int		get_id_room(char **ids, char *name)
+static char	**set_id_rooms(char **ids, char *ln)
 {
-	int	i;
-
-	i = 0;
-	while (ids && ids[i])
-	{
-		if (!ft_strcmp(ids[i], name))
-			return (i);
-		i++;
-	}
-	return (-1);
-}
-
-static char **set_id_rooms(char **ids, char *ln)
-{
-	char *name;
-	int i;
+	char	*name;
+	int		i;
 
 	i = 0;
 	while (ln[i] && ln[i] != ' ')
@@ -41,16 +27,15 @@ static char **set_id_rooms(char **ids, char *ln)
 	if (ln[i])
 		return (NULL);
 	ids = ft_realloc(ids, name);
-	// free(name);
 	return (ids);
 }
 
-static char **set_tube(t_anthill *ah, char **tubes, char **rooms, char *ln)
+static char	**set_tube(t_anthill *ah, char **tubes, char **rooms, char *ln)
 {
-	int i;
-	int id1;
-	int id2;
-	char *name;
+	int		i;
+	int		id1;
+	int		id2;
+	char	*name;
 
 	i = 0;
 	while (ln[i] && ln[i] != '-')
@@ -101,12 +86,11 @@ int			get_anthill(int fd, t_anthill *ah)
 		if (!(ah->tubes = set_tube(ah, ah->tubes, ah->rooms, ln)))
 			return (0);
 		ft_putstr(ft_strreal(ln, "\n"));
-
 	}
-	printf("\n\nah->ants %i\nah->rooms %i\n",ah->ants, ah->nb_rooms);
-	printf("ah->tubes %i\n",ah->nb_tubes);
-	printf("ah->id_start %i, start name %s\n",ah->id_start, ah->rooms[ah->id_start]);
-	printf("ah->id_end   %i,   end name %s\n",ah->id_end, ah->rooms[ah->id_end]);
+	printf("\n\nah->ants %i\nah->rooms %i\n", ah->ants, ah->nb_rooms);
+	printf("ah->tubes %i\n", ah->nb_tubes);
+	printf("ah->id_start %i, start name %s\n", ah->id_start, ah->rooms[ah->id_start]);
+	printf("ah->id_end   %i,   end name %s\n", ah->id_end, ah->rooms[ah->id_end]);
 	printf("\n\nROOMS\n");
 	ft_puttab_str(ah->rooms);
 	printf("\n\nTUBES\n");

@@ -6,11 +6,26 @@
 /*   By: mhaziza <mhaziza@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/14 20:43:16 by mhaziza           #+#    #+#             */
-/*   Updated: 2017/02/14 21:41:56 by mhaziza          ###   ########.fr       */
+/*   Updated: 2017/02/15 15:19:59 by mhaziza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
+
+
+int			get_id_room(char **ids, char *name)
+{
+	int	i;
+
+	i = 0;
+	while (ids && ids[i])
+	{
+		if (!ft_strcmp(ids[i], name))
+			return (i);
+		i++;
+	}
+	return (-1);
+}
 
 int	init_adjacency_map(t_anthill *ah)
 {

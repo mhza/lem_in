@@ -6,7 +6,7 @@
 #    By: mhaziza <mhaziza@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/02/14 17:16:56 by mhaziza           #+#    #+#              #
-#    Updated: 2017/02/14 20:47:23 by mhaziza          ###   ########.fr        #
+#    Updated: 2017/02/15 18:06:14 by mhaziza          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,8 @@ LIBFT	=	 -L./libft -lft
 SRCS	=	lem_in.c \
 			get_anthill.c \
 			set_adjacency.c \
+			bfs.c \
+			bfs_utils.c \
 
 OBJS	=   $(SRCS:.c=.o)
 

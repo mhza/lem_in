@@ -6,7 +6,7 @@
 /*   By: mhaziza <mhaziza@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/14 14:15:40 by mhaziza           #+#    #+#             */
-/*   Updated: 2017/02/14 21:40:59 by mhaziza          ###   ########.fr       */
+/*   Updated: 2017/02/15 18:45:06 by mhaziza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,5 +51,6 @@ int	main(int ac, char **av)
 	ah.tubes[0] = 0;
 	if (!get_anthill(fd, &ah))
 		return (ret_putstr_fd("ERROR", 2));
+	bfs(&ah);
 	return (1);
 }
