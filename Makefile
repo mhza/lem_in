@@ -6,7 +6,7 @@
 #    By: mhaziza <mhaziza@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/02/14 17:16:56 by mhaziza           #+#    #+#              #
-#    Updated: 2017/02/16 09:44:40 by mhaziza          ###   ########.fr        #
+#    Updated: 2017/02/16 11:32:23 by mhaziza          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ SRCS	=	lem_in.c \
 			get_anthill.c \
 			set_adjacency.c \
 			bfs.c \
-			bfs_utils.c \
+			debug.c \
 			anthill_utils.c \
 
 OBJS	=   $(SRCS:.c=.o)

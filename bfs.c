@@ -6,14 +6,59 @@
 /*   By: mhaziza <mhaziza@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/15 17:05:45 by mhaziza           #+#    #+#             */
-/*   Updated: 2017/02/16 10:23:26 by mhaziza          ###   ########.fr       */
+/*   Updated: 2017/02/16 11:30:35 by mhaziza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
+static int	set_path(t_bfs *bfs)
+{
+	int i;
+	int deg_p;
 
-int	get_top_tmp(t_bfs *bfs, int size)
+	deg_p = bfs->deg[bfs->p];
+	bfs->path = (int*)malloc(sizeof(int) * (deg_p + 1));
+	bfs->path[deg_p] = bfs->p;
+	i = deg_p;
+	while (i)
+	{
+		bfs->path[i - 1] = bfs->prev[bfs->path[i]];
+		i--;
+	}
+	return (1);
+}
+
+static int	init(t_bfs *bfs, int size, t_anthill *ah)
+{
+	int	i;
+
+	if (!(bfs->deg = (int*)malloc(sizeof(int) * size)))
+		return (0);
+	if (!(bfs->prev = (int*)malloc(sizeof(int) * size)))
+		return (0);
+	if (!(bfs->mked = (int*)malloc(sizeof(int) * size)))
+		return (0);
+	if (!(bfs->tmp = (int*)malloc(sizeof(int) * size)))
+		return (0);
+	i = -1;
+	while (++i < size)
+	{
+		bfs->deg[i] = -1;
+		bfs->prev[i] = -1;
+		bfs->mked[i] = -1;
+		bfs->tmp[i] = 0;
+	}
+	bfs->s = ah->id_start;
+	bfs->p = ah->id_end;
+	bfs->deg[bfs->s] = 0;
+	bfs->mked[bfs->s] = 0;
+	bfs->tmp[bfs->s] = 1;
+	bfs->path = NULL;
+	return (1);
+}
+
+static int	get_top_tmp(t_bfs *bfs, int size)
 {
 	int i;
 
@@ -27,7 +72,7 @@ int	get_top_tmp(t_bfs *bfs, int size)
 	return (-1);
 }
 
-int *bfs(t_anthill *ah)
+int			*bfs(t_anthill *ah)
 {
 	t_bfs	bfs;
 	int		i;
@@ -35,59 +80,25 @@ int *bfs(t_anthill *ah)
 
 	if (!init(&bfs, ah->nb_rooms, ah))
 		return (NULL);
-	ft_putstr("DEGRES");
-	ft_putchar('\n');
-	ft_putints(bfs.deg, ah->nb_rooms);
-	ft_putchar('\n');
-	ft_putstr("PREVIOUS NODE");
-	ft_putchar('\n');
-	ft_putints(bfs.prev, ah->nb_rooms);
-	ft_putchar('\n');
-	ft_putstr("MARKED");
-	ft_putchar('\n');
-	ft_putints(bfs.mked, ah->nb_rooms);
-	ft_putchar('\n');
-	ft_putstr("TEMP");
-	ft_putchar('\n');
-	ft_putints(bfs.tmp, ah->nb_rooms);
-	ft_putstr("------------------------");
-	ft_putchar('\n');
+	print_debug(&bfs, ah);
 	while (!bfs.tmp[bfs.p] && (i = get_top_tmp(&bfs, ah->nb_rooms)) != -1)
 	{
-		printf("nouvea sommet id= %i    nom= %s \n",i, get_room_by_id(ah, i));
 		j = 0;
 		while (j < ah->nb_rooms)
 		{
-			printf("while ligne - room is %i\n", j);
 			if (bfs.mked[j] == -1 && ah->adjacency[i][j] == 1)
 			{
-				set_mked(&bfs, 0, j);
-				set_tmp(&bfs, 1, j);
-				set_prev(&bfs, i, j);
-				set_deg(&bfs, bfs.deg[i] + 1, j);
+				bfs.mked[j] = 0;
+				bfs.tmp[j] = 1;
+				bfs.prev[j] = i;
+				bfs.deg[j] = bfs.deg[i] + 1;
 			}
 			j++;
-			set_mked(&bfs, 1, i);
+			bfs.mked[i] = 1;
 		}
-		set_tmp(&bfs, 0, i);
+		bfs.tmp[i] = 0;
 	}
-	ft_putstr("DEGRES");
-	ft_putchar('\n');
-	ft_putints(bfs.deg, ah->nb_rooms);
-	ft_putchar('\n');
-	ft_putstr("PREVIOUS NODE");
-	ft_putchar('\n');
-	ft_putints(bfs.prev, ah->nb_rooms);
-	ft_putchar('\n');
-	ft_putstr("MARKED");
-	ft_putchar('\n');
-	ft_putints(bfs.mked, ah->nb_rooms);
-	ft_putchar('\n');
-	ft_putstr("TEMP");
-	ft_putchar('\n');
-	ft_putints(bfs.tmp, ah->nb_rooms);
 	set_path(&bfs);
-	ft_putstr("\n>>>>PATH<<<<\n");
-	ft_putints(bfs.path, bfs.deg[bfs.p] + 1);
+	print_debug(&bfs, ah);
 	return (NULL);
 }

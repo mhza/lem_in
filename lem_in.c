@@ -6,13 +6,13 @@
 /*   By: mhaziza <mhaziza@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/14 14:15:40 by mhaziza           #+#    #+#             */
-/*   Updated: 2017/02/15 18:45:06 by mhaziza          ###   ########.fr       */
+/*   Updated: 2017/02/16 11:31:35 by mhaziza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-char	*ft_strreal(char *s1, char *s2)
+char		*ft_strreal(char *s1, char *s2)
 {
 	char	*new;
 
@@ -21,11 +21,19 @@ char	*ft_strreal(char *s1, char *s2)
 		new = ft_strdup(s2);
 	else if ((new = ft_strjoin(s1, s2)) == NULL)
 		return (NULL);
-	// free(s1);
 	return (new);
 }
 
-static int ret_putstr_fd(char *str, int fd)
+char		*set_inputstr(char *input, char *ln)
+{
+	if (!(input = ft_strreal(input, ln)))
+		return (NULL);
+	if (!(input = ft_strreal(input, "\n")))
+		return (NULL);
+	return (input);
+}
+
+static int	ret_putstr_fd(char *str, int fd)
 {
 	ft_putstr_fd(str, fd);
 	ft_putstr_fd("\n", fd);
@@ -35,7 +43,7 @@ static int ret_putstr_fd(char *str, int fd)
 		return (1);
 }
 
-int	main(int ac, char **av)
+int			main(int ac, char **av)
 {
 	int			fd;
 	t_anthill	ah;
@@ -51,6 +59,7 @@ int	main(int ac, char **av)
 	ah.tubes[0] = 0;
 	if (!get_anthill(fd, &ah))
 		return (ret_putstr_fd("ERROR", 2));
+	debug_input(&ah);
 	bfs(&ah);
 	return (1);
 }

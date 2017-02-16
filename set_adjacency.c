@@ -6,13 +6,11 @@
 /*   By: mhaziza <mhaziza@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/14 20:43:16 by mhaziza           #+#    #+#             */
-/*   Updated: 2017/02/16 09:39:48 by mhaziza          ###   ########.fr       */
+/*   Updated: 2017/02/16 10:56:54 by mhaziza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
-
-
 
 int	init_adjacency_map(t_anthill *ah)
 {
@@ -25,7 +23,8 @@ int	init_adjacency_map(t_anthill *ah)
 	while (++i < ah->nb_rooms)
 	{
 		j = -1;
-		if (!(ah->adjacency[i] = (int*)malloc(sizeof(int) * (ah->nb_rooms + 1))))
+		if (!(ah->adjacency[i] =
+			(int*)malloc(sizeof(int) * (ah->nb_rooms + 1))))
 			return (0);
 		while (++j < ah->nb_rooms)
 			ah->adjacency[i][j] = 0;

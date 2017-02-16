@@ -6,7 +6,7 @@
 /*   By: mhaziza <mhaziza@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/14 20:39:03 by mhaziza           #+#    #+#             */
-/*   Updated: 2017/02/15 18:03:16 by mhaziza          ###   ########.fr       */
+/*   Updated: 2017/02/16 11:28:48 by mhaziza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,50 +52,51 @@ static char	**set_tube(t_anthill *ah, char **tubes, char **rooms, char *ln)
 	return (ft_realloc(tubes, ln));
 }
 
+static char	*get_rooms(char *ln, t_anthill *ah, char *input)
+{
+	if (ft_strchr(ln, ' ') && !ft_strchr(ln, '-') && !ft_strchr(ln, '#'))
+	{
+		ah->nb_rooms += 1;
+		if (!(ah->rooms = set_id_rooms(ah->rooms, ln)))
+			return (NULL);
+	}
+	else if (!ft_strcmp(ln, "##start"))
+		ah->id_start = ah->nb_rooms;
+	else if (!ft_strcmp(ln, "##end"))
+		ah->id_end = ah->nb_rooms;
+	return (set_inputstr(input, ln));
+}
+
+static char	*get_tubes(char *ln, t_anthill *ah, char *input)
+{
+	ah->nb_tubes += 1;
+	if (!(ah->tubes = set_tube(ah, ah->tubes, ah->rooms, ln)))
+		return (NULL);
+	return (set_inputstr(input, ln));
+}
+
 int			get_anthill(int fd, t_anthill *ah)
 {
 	char	*ln;
+	char	*input;
 
 	get_next_line(fd, &ln);
-	ft_putstr(ft_strreal(ln, "\n"));
+	if (!(input = ft_strnew(ft_strlen(ln))))
+		return (0);
+	if (!(input = set_inputstr(input, ln)))
+		return (0);
 	if ((ah->ants = ft_atoi(ln)) < 1)
 		return (0);
 	while (get_next_line(fd, &ln) && !ft_strchr(ln, '-'))
-	{
-		if (ft_strchr(ln, ' ') && !ft_strchr(ln, '-') && !ft_strchr(ln, '#'))
-		{
-			ah->nb_rooms += 1;
-			if (!(ah->rooms = set_id_rooms(ah->rooms, ln)))
-				return (0);
-		}
-		else if (!ft_strcmp(ln, "##start"))
-			ah->id_start = ah->nb_rooms;
-		else if (!ft_strcmp(ln, "##end"))
-			ah->id_end = ah->nb_rooms;
-		ft_putstr(ft_strreal(ln, "\n"));
-	}
+		if (!(input = get_rooms(ln, ah, input)))
+			return (0);
 	if (!init_adjacency_map(ah))
 		return (0);
-	ah->nb_tubes += 1;
-	if (!(ah->tubes = set_tube(ah, ah->tubes, ah->rooms, ln)))
+	if (!(input = get_tubes(ln, ah, input)))
 		return (0);
-	ft_putstr(ft_strreal(ln, "\n"));
 	while (get_next_line(fd, &ln))
-	{
-		ah->nb_tubes += 1;
-		if (!(ah->tubes = set_tube(ah, ah->tubes, ah->rooms, ln)))
+		if (!(input = get_tubes(ln, ah, input)))
 			return (0);
-		ft_putstr(ft_strreal(ln, "\n"));
-	}
-	printf("\n\nah->ants %i\nah->rooms %i\n", ah->ants, ah->nb_rooms);
-	printf("ah->tubes %i\n", ah->nb_tubes);
-	printf("ah->id_start %i, start name %s\n", ah->id_start, ah->rooms[ah->id_start]);
-	printf("ah->id_end   %i,   end name %s\n", ah->id_end, ah->rooms[ah->id_end]);
-	printf("\n\nROOMS\n");
-	ft_puttab_str(ah->rooms);
-	printf("\n\nTUBES\n");
-	ft_puttab_str(ah->tubes);
-	printf("\n\nADJACENCY MAP\n");
-	ft_puttab_int(ah->adjacency, ah->nb_rooms, ah->nb_rooms);
+	ft_putstr(input);
 	return (1);
 }
