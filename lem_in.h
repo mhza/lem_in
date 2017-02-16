@@ -6,7 +6,7 @@
 /*   By: mhaziza <mhaziza@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/14 14:13:28 by mhaziza           #+#    #+#             */
-/*   Updated: 2017/02/16 11:31:25 by mhaziza          ###   ########.fr       */
+/*   Updated: 2017/02/16 11:35:31 by mhaziza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,21 +38,21 @@ typedef struct	s_bfs
 	int	p;
 }				t_bfs;
 
-typedef struct	s_room
-{
-	int		id;
-	int		is_start;
-	int		is_end;
-	char	*name;
-	int		*ants;
-	int		*room;
-}				t_room;
-
-typedef struct	s_ant
-{
-	int	id;
-	int	room;
-}				t_ant;
+// typedef struct	s_room
+// {
+// 	int		id;
+// 	int		is_start;
+// 	int		is_end;
+// 	char	*name;
+// 	int		*ants;
+// 	int		*room;
+// }				t_room;
+//
+// typedef struct	s_ant
+// {
+// 	int	id;
+// 	int	room;
+// }				t_ant;
 
 char			*set_inputstr(char *input, char *ln);
 

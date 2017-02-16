@@ -6,7 +6,7 @@
 /*   By: mhaziza <mhaziza@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/14 14:15:40 by mhaziza           #+#    #+#             */
-/*   Updated: 2017/02/16 11:31:35 by mhaziza          ###   ########.fr       */
+/*   Updated: 2017/02/16 11:40:56 by mhaziza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,19 +45,19 @@ static int	ret_putstr_fd(char *str, int fd)
 
 int			main(int ac, char **av)
 {
-	int			fd;
+	// int			fd;
 	t_anthill	ah;
 
-	if (ac != 2)
-		return (ret_putstr_fd("Usage : ./lem-in <filename>", 2));
-	if ((fd = open(av[1], O_RDONLY)) == -1)
-		return (0);
+	if (ac != 1 || !av[0])
+		return (ret_putstr_fd("Usage : ./lem-in", 2));
+	// if ((fd = open(av[1], O_RDONLY)) == -1)
+	// 	return (0);
 	ft_bzero(&ah, sizeof(t_anthill));
 	ah.rooms = (char**)malloc(sizeof(char*));
 	ah.rooms[0] = 0;
 	ah.tubes = (char**)malloc(sizeof(char*));
 	ah.tubes[0] = 0;
-	if (!get_anthill(fd, &ah))
+	if (!get_anthill(0, &ah))
 		return (ret_putstr_fd("ERROR", 2));
 	debug_input(&ah);
 	bfs(&ah);
