@@ -6,7 +6,7 @@
 /*   By: mhaziza <mhaziza@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/14 14:15:40 by mhaziza           #+#    #+#             */
-/*   Updated: 2017/02/16 11:40:56 by mhaziza          ###   ########.fr       */
+/*   Updated: 2017/02/16 12:59:25 by mhaziza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,13 +45,11 @@ static int	ret_putstr_fd(char *str, int fd)
 
 int			main(int ac, char **av)
 {
-	// int			fd;
 	t_anthill	ah;
+	t_bfs		bfs;
 
 	if (ac != 1 || !av[0])
 		return (ret_putstr_fd("Usage : ./lem-in", 2));
-	// if ((fd = open(av[1], O_RDONLY)) == -1)
-	// 	return (0);
 	ft_bzero(&ah, sizeof(t_anthill));
 	ah.rooms = (char**)malloc(sizeof(char*));
 	ah.rooms[0] = 0;
@@ -60,6 +58,7 @@ int			main(int ac, char **av)
 	if (!get_anthill(0, &ah))
 		return (ret_putstr_fd("ERROR", 2));
 	debug_input(&ah);
-	bfs(&ah);
+	call_bfs(&ah, &bfs);
+	print_power(&ah);
 	return (1);
 }

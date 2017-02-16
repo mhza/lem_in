@@ -6,7 +6,7 @@
 /*   By: mhaziza <mhaziza@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/15 17:05:45 by mhaziza           #+#    #+#             */
-/*   Updated: 2017/02/16 11:30:35 by mhaziza          ###   ########.fr       */
+/*   Updated: 2017/02/16 11:48:43 by mhaziza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,33 +72,32 @@ static int	get_top_tmp(t_bfs *bfs, int size)
 	return (-1);
 }
 
-int			*bfs(t_anthill *ah)
+int			*call_bfs(t_anthill *ah, t_bfs *bfs)
 {
-	t_bfs	bfs;
 	int		i;
 	int		j;
 
-	if (!init(&bfs, ah->nb_rooms, ah))
+	if (!init(bfs, ah->nb_rooms, ah))
 		return (NULL);
-	print_debug(&bfs, ah);
-	while (!bfs.tmp[bfs.p] && (i = get_top_tmp(&bfs, ah->nb_rooms)) != -1)
+	print_debug(bfs, ah);
+	while (!bfs->tmp[bfs->p] && (i = get_top_tmp(bfs, ah->nb_rooms)) != -1)
 	{
 		j = 0;
 		while (j < ah->nb_rooms)
 		{
-			if (bfs.mked[j] == -1 && ah->adjacency[i][j] == 1)
+			if (bfs->mked[j] == -1 && ah->adjacency[i][j] == 1)
 			{
-				bfs.mked[j] = 0;
-				bfs.tmp[j] = 1;
-				bfs.prev[j] = i;
-				bfs.deg[j] = bfs.deg[i] + 1;
+				bfs->mked[j] = 0;
+				bfs->tmp[j] = 1;
+				bfs->prev[j] = i;
+				bfs->deg[j] = bfs->deg[i] + 1;
 			}
 			j++;
-			bfs.mked[i] = 1;
+			bfs->mked[i] = 1;
 		}
-		bfs.tmp[i] = 0;
+		bfs->tmp[i] = 0;
 	}
-	set_path(&bfs);
-	print_debug(&bfs, ah);
+	set_path(bfs);
+	print_debug(bfs, ah);
 	return (NULL);
 }

@@ -1,16 +1,50 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   set_adjacency.c                                    :+:      :+:    :+:   */
+/*   adjacency.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mhaziza <mhaziza@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/14 20:43:16 by mhaziza           #+#    #+#             */
-/*   Updated: 2017/02/16 10:56:54 by mhaziza          ###   ########.fr       */
+/*   Updated: 2017/02/16 13:03:53 by mhaziza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
+
+int	get_value_ij(t_power_m *datas)
+{
+	int k;
+	int value;
+
+	k = -1;
+	value = 0;
+	while (++k < datas->n)
+		value += datas->m1[datas->i][k] * datas->m2[datas->j][k];
+	return (value);
+}
+
+int	**power_adjacency(t_power_m *datas)
+{
+	int	**ret;
+
+	if (!(ret = (int**)malloc(sizeof(int*) * datas->n)))
+		return (NULL);
+	datas->i = 0;
+	while (datas->i < datas->n)
+	{
+		datas->j = 0;
+		if (!(ret[datas->i] = (int*)malloc(sizeof(int) * datas->n)))
+			return (NULL);
+		while (datas->j < datas->n)
+		{
+			ret[datas->i][datas->j] = get_value_ij(datas);
+			datas->j++;
+		}
+		datas->i++;
+	}
+	return (ret);
+}
 
 int	init_adjacency_map(t_anthill *ah)
 {

@@ -6,7 +6,7 @@
 #    By: mhaziza <mhaziza@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/02/14 17:16:56 by mhaziza           #+#    #+#              #
-#    Updated: 2017/02/16 11:32:23 by mhaziza          ###   ########.fr        #
+#    Updated: 2017/02/16 11:43:50 by mhaziza          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,8 +16,8 @@ CFLAGS	= 	-Wall -Wextra -Werror -I.
 RM		=   rm -f
 LIBFT	=	 -L./libft -lft
 SRCS	=	lem_in.c \
-			get_anthill.c \
-			set_adjacency.c \
+			anthill.c \
+			adjacency.c \
 			bfs.c \
 			debug.c \
 			anthill_utils.c \
