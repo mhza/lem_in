@@ -1,41 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   set_adjacency.c                                    :+:      :+:    :+:   */
+/*   anthill_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mhaziza <mhaziza@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/14 20:43:16 by mhaziza           #+#    #+#             */
-/*   Updated: 2017/02/16 09:39:48 by mhaziza          ###   ########.fr       */
+/*   Created: 2017/02/16 09:39:41 by mhaziza           #+#    #+#             */
+/*   Updated: 2017/02/16 09:45:13 by mhaziza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-
-
-int	init_adjacency_map(t_anthill *ah)
+int			get_id_room(char **ids, char *name)
 {
 	int	i;
-	int	j;
 
-	if (!(ah->adjacency = (int**)malloc(sizeof(int*) * (ah->nb_rooms + 1))))
-		return (0);
-	i = -1;
-	while (++i < ah->nb_rooms)
+	i = 0;
+	while (ids && ids[i])
 	{
-		j = -1;
-		if (!(ah->adjacency[i] = (int*)malloc(sizeof(int) * (ah->nb_rooms + 1))))
-			return (0);
-		while (++j < ah->nb_rooms)
-			ah->adjacency[i][j] = 0;
+		if (!ft_strcmp(ids[i], name))
+			return (i);
+		i++;
 	}
-	return (1);
+	return (-1);
 }
 
-int	**set_adjacency(int **map, int id1, int id2)
+char		*get_room_by_id(t_anthill *ah, int id)
 {
-	map[id1][id2] = 1;
-	map[id2][id1] = 1;
-	return (map);
+	if (ah && ah->rooms && id < ah->nb_rooms)
+		return (ah->rooms[id]);
+	return (NULL);
 }

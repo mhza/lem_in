@@ -6,7 +6,7 @@
 /*   By: mhaziza <mhaziza@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/15 17:35:24 by mhaziza           #+#    #+#             */
-/*   Updated: 2017/02/15 18:53:37 by mhaziza          ###   ########.fr       */
+/*   Updated: 2017/02/16 10:25:52 by mhaziza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,25 @@ void	set_tmp(t_bfs *bfs, int value, int id)
 	bfs->tmp[id] = value;
 }
 
+
+int		set_path(t_bfs *bfs)
+{
+	int i;
+	int deg_p;
+
+	deg_p = bfs->deg[bfs->p];
+	printf("degre end %i\n", deg_p);
+	bfs->path = (int*)malloc(sizeof(int) * (deg_p + 1));
+	bfs->path[deg_p] = bfs->p;
+	i = deg_p;
+	while (i)
+	{
+		bfs->path[i - 1] = bfs->prev[bfs->path[i]];
+		i--;
+	}
+	return (1);
+}
+
 int		init(t_bfs *bfs, int size, t_anthill *ah)
 {
 	int	i;
@@ -46,8 +65,6 @@ int		init(t_bfs *bfs, int size, t_anthill *ah)
 		return (0);
 	if (!(bfs->tmp = (int*)malloc(sizeof(int) * size)))
 		return (0);
-	if (!(bfs->path = (int*)malloc(sizeof(int) * size)))
-		return (0);
 	i = -1;
 	while (++i < size)
 	{
@@ -55,7 +72,6 @@ int		init(t_bfs *bfs, int size, t_anthill *ah)
 		bfs->prev[i] = -1;
 		bfs->mked[i] = -1;
 		bfs->tmp[i] = 0;
-		bfs->path[i] = -1;
 	}
 	bfs->s = ah->id_start;
 	bfs->p = ah->id_end;

@@ -6,7 +6,7 @@
 /*   By: mhaziza <mhaziza@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/14 14:13:28 by mhaziza           #+#    #+#             */
-/*   Updated: 2017/02/15 18:27:11 by mhaziza          ###   ########.fr       */
+/*   Updated: 2017/02/16 10:12:17 by mhaziza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,9 @@ typedef struct	s_ant
 char			*ft_strreal(char *s1, char *s2);
 
 int				get_anthill(int fd, t_anthill *ah);
+
 int				get_id_room(char **ids, char *name);
+char			*get_room_by_id(t_anthill *ah, int id);
 
 int				init_adjacency_map(t_anthill *ah);
 int				**set_adjacency(int **map, int id1, int id2);
@@ -68,4 +70,5 @@ void			set_mked(t_bfs *bfs, int value, int id);
 void			set_tmp(t_bfs *bfs, int value, int id);
 
 int				*bfs(t_anthill *ah);
+int				set_path(t_bfs *bfs);
 #endif
