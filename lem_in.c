@@ -6,7 +6,7 @@
 /*   By: mhaziza <mhaziza@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/14 14:15:40 by mhaziza           #+#    #+#             */
-/*   Updated: 2017/02/16 12:59:25 by mhaziza          ###   ########.fr       */
+/*   Updated: 2017/02/17 13:44:05 by mhaziza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,19 @@ static int	ret_putstr_fd(char *str, int fd)
 		return (1);
 }
 
+void		init_struct(t_anthill *ah)
+{
+	ft_bzero(ah, sizeof(t_anthill));
+	ah->rooms = (char**)malloc(sizeof(char*));
+	ah->rooms[0] = 0;
+	ah->tubes = (char**)malloc(sizeof(char*));
+	ah->tubes[0] = 0;
+	ah->id_start = -1;
+	ah->id_end = -1;
+	ah->nb_rooms = 0;
+	ah->nb_tubes = 0;
+}
+
 int			main(int ac, char **av)
 {
 	t_anthill	ah;
@@ -50,15 +63,13 @@ int			main(int ac, char **av)
 
 	if (ac != 1 || !av[0])
 		return (ret_putstr_fd("Usage : ./lem-in", 2));
-	ft_bzero(&ah, sizeof(t_anthill));
-	ah.rooms = (char**)malloc(sizeof(char*));
-	ah.rooms[0] = 0;
-	ah.tubes = (char**)malloc(sizeof(char*));
-	ah.tubes[0] = 0;
+	init_struct(&ah);
 	if (!get_anthill(0, &ah))
 		return (ret_putstr_fd("ERROR", 2));
-	debug_input(&ah);
+	// debug_input(&ah);
 	call_bfs(&ah, &bfs);
-	print_power(&ah);
+	// print_power(&ah);
+	ft_putchar('\n');
+	print_flow(&ah, bfs.path, bfs.deg[bfs.p]);
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: mhaziza <mhaziza@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/14 14:13:28 by mhaziza           #+#    #+#             */
-/*   Updated: 2017/02/16 13:00:26 by mhaziza          ###   ########.fr       */
+/*   Updated: 2017/02/17 13:42:34 by mhaziza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 # define LEM_IN_H
 
 # include "libft/libft.h"
+# define MIN(x, y) (x <= y ? x : y)
+# define MAX(x, y) (x > y ? x : y)
 
 typedef struct	s_anthill
 {
@@ -60,8 +62,10 @@ int				**power_adjacency(t_power_m *datas);
 
 int				*call_bfs(t_anthill *ah, t_bfs *bfs);
 
+void			print_flow(t_anthill *a, int *p, int d);
+
 void			print_debug(t_bfs *bfs, t_anthill *ah);
 void			debug_input(t_anthill *ah);
-void 			print_power(t_anthill *ah);
+void			print_power(t_anthill *ah);
 
 #endif

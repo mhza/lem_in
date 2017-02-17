@@ -6,7 +6,7 @@
 /*   By: mhaziza <mhaziza@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/14 20:39:03 by mhaziza           #+#    #+#             */
-/*   Updated: 2017/02/16 11:43:20 by mhaziza          ###   ########.fr       */
+/*   Updated: 2017/02/16 15:36:57 by mhaziza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,8 @@ int			get_anthill(int fd, t_anthill *ah)
 	while (get_next_line(fd, &ln) && !ft_strchr(ln, '-'))
 		if (!(input = get_rooms(ln, ah, input)))
 			return (0);
+	if (ah->id_start == -1 || ah->id_end == -1 || !ah->nb_rooms)
+		return (0);
 	if (!init_adjacency_map(ah))
 		return (0);
 	if (!(input = get_tubes(ln, ah, input)))
