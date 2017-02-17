@@ -6,13 +6,34 @@
 /*   By: mhaziza <mhaziza@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/14 20:43:16 by mhaziza           #+#    #+#             */
-/*   Updated: 2017/02/16 13:03:53 by mhaziza          ###   ########.fr       */
+/*   Updated: 2017/02/17 16:58:32 by mhaziza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-int	get_value_ij(t_power_m *datas)
+int	end_start_linked(t_anthill *ah)
+{
+	int	i;
+	int	is_start;
+	int	is_end;
+
+	i = -1;
+	is_start = 0;
+	while (++i < ah->nb_rooms && !is_start)
+		if (ah->adjacency[ah->id_start][i])
+			is_start = 1;
+	is_end = 0;
+	i = -1;
+	while (++i < ah->nb_rooms && !is_start)
+		if (ah->adjacency[ah->id_end][i])
+			is_start = 1;
+	if (!is_start || !is_end)
+		return (0);
+	return (1);
+}
+
+int	calc_value_ij(t_power_m *datas)
 {
 	int k;
 	int value;
@@ -38,7 +59,7 @@ int	**power_adjacency(t_power_m *datas)
 			return (NULL);
 		while (datas->j < datas->n)
 		{
-			ret[datas->i][datas->j] = get_value_ij(datas);
+			ret[datas->i][datas->j] = calc_value_ij(datas);
 			datas->j++;
 		}
 		datas->i++;

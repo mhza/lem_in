@@ -1,9 +1,12 @@
 20
 ##start
+#commentaire
+#commentaire
+#commentaire
+#commentaire
 room1 3 3
 room2 3 3
 room3 3 3
-#commentaire
 room4 3 3
 room5 3 3
 ##end

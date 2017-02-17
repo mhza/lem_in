@@ -1,7 +1,9 @@
+20
 room1 3 3
 room2 3 3
 ##start
 room3 3 3
+#comment
 room4 3 3
 ##end
 room5 3 3

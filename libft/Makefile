@@ -6,7 +6,7 @@
 #    By: mhaziza <mhaziza@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/18 16:29:51 by mhaziza           #+#    #+#              #
-#    Updated: 2017/02/08 16:59:50 by mhaziza          ###   ########.fr        #
+#    Updated: 2017/02/17 14:21:01 by mhaziza          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,7 +57,9 @@ SRCS	=   get_next_line.c \
 			ft_strequ.c \
 			ft_strnequ.c \
 			ft_strsub.c \
+			ft_strsub_free.c \
 			ft_strjoin.c \
+			ft_strjoin_free.c \
 			ft_strtrim.c \
 			ft_strsplit.c \
 			ft_itoa.c \

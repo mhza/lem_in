@@ -1,36 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_realloc.c                                       :+:      :+:    :+:   */
+/*   ft_strsub_free.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mhaziza <mhaziza@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/24 13:41:05 by mhaziza           #+#    #+#             */
-/*   Updated: 2017/02/17 14:55:23 by mhaziza          ###   ########.fr       */
+/*   Created: 2016/11/20 10:14:03 by mhaziza           #+#    #+#             */
+/*   Updated: 2017/02/17 14:20:49 by mhaziza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	**ft_realloc(char **tab, char *neww)
+char	*ft_strsub_free(char *s, unsigned int start, size_t len)
 {
+	char			*str;
 	unsigned int	i;
-	unsigned int	tab_size;
-	char			**tab_tmp;
 
-	tab_size = 0;
-	while (tab && tab[tab_size])
-		tab_size++;
-	if (!(tab_tmp = (char**)malloc(sizeof(char*) * (tab_size + 2))))
-		return (NULL);
-	i = 0;
-	while (i < tab_size)
+	if (s)
 	{
-		tab_tmp[i] = tab[i];
-		i++;
+		if ((str = ft_strnew(len)) == NULL)
+			return (NULL);
+		i = -1;
+		while (++i < len)
+			str[i] = s[start + i];
+		str[i] = '\0';
+		free(s);
+		return (str);
 	}
-	tab_tmp[i] = ft_strdup(neww);
-	tab_tmp[i + 1] = 0;
-	free(tab);
-	return (tab_tmp);
+	return (NULL);
 }

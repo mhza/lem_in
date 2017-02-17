@@ -6,7 +6,7 @@
 /*   By: mhaziza <mhaziza@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/14 14:15:40 by mhaziza           #+#    #+#             */
-/*   Updated: 2017/02/17 13:44:05 by mhaziza          ###   ########.fr       */
+/*   Updated: 2017/02/17 17:04:53 by mhaziza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,20 +17,22 @@ char		*ft_strreal(char *s1, char *s2)
 	char	*new;
 
 	new = NULL;
-	if (s1 == NULL || *s1 == '\0')
-		new = ft_strdup(s2);
-	else if ((new = ft_strjoin(s1, s2)) == NULL)
-		return (NULL);
+	if ((s1 == NULL || *s1 == '\0') && s2)
+	{
+		if ((new = ft_strnew(ft_strlen(s2) + 1)) == NULL)
+			return (NULL);
+	}
+	else
+	{
+		if ((new = ft_strnew(ft_strlen(s1) + ft_strlen(s2) + 1)) == NULL)
+			return (NULL);
+		ft_strcpy(new, s1);
+	}
+	ft_strcat(new, s2);
+	new[ft_strlen(new)] = '\n';
+	new[ft_strlen(new)] = '\0';
+	free(s1);
 	return (new);
-}
-
-char		*set_inputstr(char *input, char *ln)
-{
-	if (!(input = ft_strreal(input, ln)))
-		return (NULL);
-	if (!(input = ft_strreal(input, "\n")))
-		return (NULL);
-	return (input);
 }
 
 static int	ret_putstr_fd(char *str, int fd)
@@ -56,6 +58,32 @@ void		init_struct(t_anthill *ah)
 	ah->nb_tubes = 0;
 }
 
+void		free_all(t_anthill *ah, t_bfs *bfs)
+{
+	int i;
+
+	i = -1;
+	while (++i < ah->nb_rooms)
+		free(ah->rooms[i]);
+	i = -1;
+	while (++i < ah->nb_tubes)
+		free(ah->tubes[i]);
+	i = -1;
+	while (++i < ah->nb_rooms)
+		free(ah->adjacency[i]);
+	free(ah->rooms);
+	free(ah->tubes);
+	if (bfs)
+	{
+		free(ah->adjacency);
+		free(bfs->deg);
+		free(bfs->path);
+		free(bfs->prev);
+		free(bfs->mked);
+		free(bfs->tmp);
+	}
+}
+
 int			main(int ac, char **av)
 {
 	t_anthill	ah;
@@ -66,10 +94,15 @@ int			main(int ac, char **av)
 	init_struct(&ah);
 	if (!get_anthill(0, &ah))
 		return (ret_putstr_fd("ERROR", 2));
-	// debug_input(&ah);
-	call_bfs(&ah, &bfs);
-	// print_power(&ah);
+	if (end_start_linked(&ah))
+		call_bfs(&ah, &bfs);
+	else
+	{
+		free_all(&ah, NULL);
+		return (0);
+	}
 	ft_putchar('\n');
 	print_flow(&ah, bfs.path, bfs.deg[bfs.p]);
+	free_all(&ah, &bfs);
 	return (1);
 }

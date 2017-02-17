@@ -6,7 +6,7 @@
 /*   By: mhaziza <mhaziza@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/26 10:18:09 by mhaziza           #+#    #+#             */
-/*   Updated: 2017/01/26 10:44:43 by mhaziza          ###   ########.fr       */
+/*   Updated: 2017/02/17 14:20:43 by mhaziza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,4 +108,6 @@ wchar_t			*ft_wstrncpyp(wchar_t *dest, const wchar_t *src, size_t n);
 int				ft_get_nb_wchar(wchar_t *src, int n);
 int				ft_get_nb_bytes(wchar_t *src, int n);
 char			*ft_toupperstr(char *str);
+char			*ft_strjoin_free(char *s1, char *s2, int to_free);
+char			*ft_strsub_free(char *s, unsigned int start, size_t len);
 #endif

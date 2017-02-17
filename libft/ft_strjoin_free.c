@@ -1,36 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_realloc.c                                       :+:      :+:    :+:   */
+/*   ft_strjoin_free.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mhaziza <mhaziza@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/24 13:41:05 by mhaziza           #+#    #+#             */
-/*   Updated: 2017/02/17 14:55:23 by mhaziza          ###   ########.fr       */
+/*   Created: 2016/11/20 10:40:20 by mhaziza           #+#    #+#             */
+/*   Updated: 2017/02/17 14:43:20 by mhaziza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	**ft_realloc(char **tab, char *neww)
+char	*ft_strjoin_free(char *s1, char *s2, int to_free)
 {
-	unsigned int	i;
-	unsigned int	tab_size;
-	char			**tab_tmp;
+	char	*str;
 
-	tab_size = 0;
-	while (tab && tab[tab_size])
-		tab_size++;
-	if (!(tab_tmp = (char**)malloc(sizeof(char*) * (tab_size + 2))))
+	if (!s1 || !s2)
 		return (NULL);
-	i = 0;
-	while (i < tab_size)
-	{
-		tab_tmp[i] = tab[i];
-		i++;
-	}
-	tab_tmp[i] = ft_strdup(neww);
-	tab_tmp[i + 1] = 0;
-	free(tab);
-	return (tab_tmp);
+	if ((str = ft_strnew(ft_strlen(s1) + ft_strlen(s2))) == NULL)
+		return (NULL);
+	ft_strcpy(str, s1);
+	ft_strcat(str, s2);
+	if (to_free >= 1 && to_free < 3)
+		free(s1);
+	if (to_free > 1 && to_free <= 3)
+		free(s2);
+	return (str);
 }

@@ -6,7 +6,7 @@
 /*   By: mhaziza <mhaziza@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/15 17:05:45 by mhaziza           #+#    #+#             */
-/*   Updated: 2017/02/16 15:39:37 by mhaziza          ###   ########.fr       */
+/*   Updated: 2017/02/17 17:03:56 by mhaziza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,6 @@ int			*call_bfs(t_anthill *ah, t_bfs *bfs)
 
 	if (!init(bfs, ah->nb_rooms, ah))
 		return (NULL);
-	// print_debug(bfs, ah);
 	while (!bfs->tmp[bfs->p] && (i = get_top_tmp(bfs, ah->nb_rooms)) != -1)
 	{
 		j = 0;
@@ -98,6 +97,5 @@ int			*call_bfs(t_anthill *ah, t_bfs *bfs)
 		bfs->tmp[i] = 0;
 	}
 	set_path(bfs);
-	// print_debug(bfs, ah);
 	return (NULL);
 }
