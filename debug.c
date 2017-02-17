@@ -6,30 +6,30 @@
 /*   By: mhaziza <mhaziza@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/15 17:35:24 by mhaziza           #+#    #+#             */
-/*   Updated: 2017/02/17 13:43:40 by mhaziza          ###   ########.fr       */
+/*   Updated: 2017/02/17 21:50:40 by mhaziza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-void	print_debug(t_bfs *bfs, t_anthill *ah)
+void	print_debug(t_bfs *bfs, int size)
 {
 	ft_putstr("------------------------\n");
 	ft_putstr("DEGRES");
 	ft_putchar('\n');
-	ft_putints(bfs->deg, ah->nb_rooms);
+	ft_putints(bfs->deg, size);
 	ft_putchar('\n');
 	ft_putstr("PREVIOUS NODE");
 	ft_putchar('\n');
-	ft_putints(bfs->prev, ah->nb_rooms);
+	ft_putints(bfs->prev, size);
 	ft_putchar('\n');
 	ft_putstr("MARKED");
 	ft_putchar('\n');
-	ft_putints(bfs->mked, ah->nb_rooms);
+	ft_putints(bfs->mked, size);
 	ft_putchar('\n');
 	ft_putstr("TEMP");
 	ft_putchar('\n');
-	ft_putints(bfs->tmp, ah->nb_rooms);
+	ft_putints(bfs->tmp, size);
 	if (bfs->path)
 	{
 		printf("degre p : %i\n", bfs->deg[bfs->p]);

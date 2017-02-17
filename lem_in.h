@@ -6,7 +6,7 @@
 /*   By: mhaziza <mhaziza@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/14 14:13:28 by mhaziza           #+#    #+#             */
-/*   Updated: 2017/02/17 16:57:12 by mhaziza          ###   ########.fr       */
+/*   Updated: 2017/02/17 22:57:02 by mhaziza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,12 @@ int				*call_bfs(t_anthill *ah, t_bfs *bfs);
 
 void			print_flow(t_anthill *a, int *p, int d);
 
-void			print_debug(t_bfs *bfs, t_anthill *ah);
+void			print_debug(t_bfs *bfs, int size);
 void			debug_input(t_anthill *ah);
 void			print_power(t_anthill *ah);
 
+int				shorter_path_size(t_anthill *ah);
+int				count_shorter_path(t_anthill *ah, int power_path);
+void			print_info(t_anthill *ah);
+void			print_all_info(t_anthill *ah);
 #endif

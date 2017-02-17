@@ -6,7 +6,7 @@
 /*   By: mhaziza <mhaziza@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/14 14:15:40 by mhaziza           #+#    #+#             */
-/*   Updated: 2017/02/17 17:25:38 by mhaziza          ###   ########.fr       */
+/*   Updated: 2017/02/17 23:00:32 by mhaziza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,12 +89,12 @@ int			main(int ac, char **av)
 	t_anthill	ah;
 	t_bfs		bfs;
 
-	if (ac != 1 || !av[0])
-		return (ret_putstr_fd("Usage : ./lem-in", 2));
+	if (ac > 2 ||
+		(av[1] && ft_strcmp(av[1], "-info") && ft_strcmp(av[1], "-all")))
+		return (ret_putstr_fd("Usage : ./lem-in [-info][-all] < filename", 2));
 	init_struct(&ah);
 	if (!get_anthill(0, &ah))
 		return (ret_putstr_fd("ERROR", 2));
-	debug_input(&ah);
 	if (end_start_linked(&ah))
 		call_bfs(&ah, &bfs);
 	else
@@ -102,8 +102,11 @@ int			main(int ac, char **av)
 		free_all(&ah, NULL);
 		return (0);
 	}
-	ft_putchar('\n');
 	print_flow(&ah, bfs.path, bfs.deg[bfs.p]);
+	if (ac == 2 && !ft_strcmp(av[1], "-info"))
+		print_info(&ah);
+	if (ac == 2 && !ft_strcmp(av[1], "-all"))
+		print_all_info(&ah);
 	free_all(&ah, &bfs);
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: mhaziza <mhaziza@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/15 17:05:45 by mhaziza           #+#    #+#             */
-/*   Updated: 2017/02/17 17:03:56 by mhaziza          ###   ########.fr       */
+/*   Updated: 2017/02/17 23:00:59 by mhaziza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,10 @@ static int	set_path(t_bfs *bfs)
 	int i;
 	int deg_p;
 
-	deg_p = bfs->deg[bfs->p];
-	bfs->path = (int*)malloc(sizeof(int) * (deg_p + 1));
+	if ((deg_p = bfs->deg[bfs->p]) < 0)
+		return (-1);
+	if (!(bfs->path = (int*)malloc(sizeof(int) * (deg_p + 1))))
+		return (-1);
 	bfs->path[deg_p] = bfs->p;
 	i = deg_p;
 	while (i)
@@ -58,16 +60,42 @@ static int	init(t_bfs *bfs, int size, t_anthill *ah)
 	return (1);
 }
 
+int			get_deg_min(t_bfs *bfs, int size)
+{
+	int	i;
+	int	min;
+
+	i = -1;
+	min = 1;
+	while (++i < size)
+		if (bfs->deg[i] < min && bfs->deg[i] > 0)
+			min = bfs->deg[i];
+	return (min);
+}
+
 static int	get_top_tmp(t_bfs *bfs, int size)
 {
-	int i;
+	int	i;
+	int	min;
+	int exist_one;
 
-	i = 0;
-	while (i < size)
+	i = -1;
+	exist_one = 0;
+	min = get_deg_min(bfs, size);
+	i = -1;
+	while (++i < size)
 	{
 		if (bfs->tmp[i])
+			exist_one = 1;
+		if (bfs->tmp[i] && (bfs->deg[i] == min || i == bfs->s))
 			return (i);
-		i++;
+	}
+	if (exist_one)
+	{
+		i = -1;
+		while (++i < size)
+			if (bfs->tmp[i] && (bfs->deg[i] == min + 1))
+				return (i);
 	}
 	return (-1);
 }

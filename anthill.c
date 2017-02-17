@@ -6,7 +6,7 @@
 /*   By: mhaziza <mhaziza@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/14 20:39:03 by mhaziza           #+#    #+#             */
-/*   Updated: 2017/02/17 17:19:27 by mhaziza          ###   ########.fr       */
+/*   Updated: 2017/02/17 20:18:37 by mhaziza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,10 +63,10 @@ int			get_anthill(int fd, t_anthill *ah)
 	input = NULL;
 	if (!(input = ft_strreal(input, ln)))
 		return (0);
-	if ((ah->ants = ft_atoi(ln)) < 1)
+	if (!ln[0] || (ah->ants = ft_atoi(ln)) < 1)
 		return (free_and_return(ret, ln));
 	free(ln);
-	while ((ret = get_next_line(fd, &ln)) && !ft_strchr(ln, '-'))
+	while ((ret = get_next_line(fd, &ln)) && !ft_strchr(ln, '-') && ln[0])
 		if (!(input = get_rooms(ln, ah, input)))
 			return (0);
 	if (ah->id_start == -1 || ah->id_end == -1 || !ah->nb_rooms)
@@ -75,7 +75,7 @@ int			get_anthill(int fd, t_anthill *ah)
 		return (0);
 	if (!(input = get_tubes(ln, ah, input)))
 		return (0);
-	while (get_next_line(fd, &ln))
+	while (get_next_line(fd, &ln) && ln[0])
 		if (!(input = get_tubes(ln, ah, input)))
 			return (0);
 	return (putstr_and_free(input));
