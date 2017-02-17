@@ -6,7 +6,7 @@
 /*   By: mhaziza <mhaziza@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/15 17:05:45 by mhaziza           #+#    #+#             */
-/*   Updated: 2017/02/17 23:00:59 by mhaziza          ###   ########.fr       */
+/*   Updated: 2017/02/17 23:27:44 by mhaziza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ static int	get_top_tmp(t_bfs *bfs, int size)
 	int	i;
 	int	min;
 	int exist_one;
+	int top;
 
 	i = -1;
 	exist_one = 0;
@@ -90,11 +91,12 @@ static int	get_top_tmp(t_bfs *bfs, int size)
 		if (bfs->tmp[i] && (bfs->deg[i] == min || i == bfs->s))
 			return (i);
 	}
-	if (exist_one)
+	top = -1;
+	while (exist_one && top == -1 && min++)
 	{
 		i = -1;
 		while (++i < size)
-			if (bfs->tmp[i] && (bfs->deg[i] == min + 1))
+			if (bfs->tmp[i] && (bfs->deg[i] == min))
 				return (i);
 	}
 	return (-1);

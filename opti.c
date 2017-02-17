@@ -6,7 +6,7 @@
 /*   By: mhaziza <mhaziza@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/17 17:00:33 by mhaziza           #+#    #+#             */
-/*   Updated: 2017/02/17 22:57:48 by mhaziza          ###   ########.fr       */
+/*   Updated: 2017/02/17 23:08:05 by mhaziza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,9 +64,9 @@ void	print_info(t_anthill *ah)
 		power++;
 	}
 	ft_putstr("----------------------------------\n");
-	ft_putstr("Length of shorter path        > ");
+	ft_putstr("Length of shorter path       ");
 	ft_putnbr(power);
-	ft_putstr("\nNumber of shorter paths       > ");
+	ft_putstr("\nNumber of shorter paths      ");
 	ft_putnbr(datas.m1[ah->id_start][ah->id_end]);
 	ft_putchar('\n');
 }
