@@ -6,7 +6,7 @@
 /*   By: mhaziza <mhaziza@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/17 17:00:33 by mhaziza           #+#    #+#             */
-/*   Updated: 2017/02/17 23:08:05 by mhaziza          ###   ########.fr       */
+/*   Updated: 2017/02/17 23:40:49 by mhaziza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ void	print_info(t_anthill *ah)
 		datas.m1 = power_adjacency(&datas);
 		power++;
 	}
+	power++;
 	ft_putstr("----------------------------------\n");
 	ft_putstr("Length of shorter path       ");
 	ft_putnbr(power);
@@ -75,6 +76,7 @@ void	print_all_info(t_anthill *ah)
 {
 	t_power_m	datas;
 	int			power;
+	int			count;
 
 	datas.m1 = ah->adjacency;
 	datas.m2 = ah->adjacency;
@@ -85,9 +87,13 @@ void	print_all_info(t_anthill *ah)
 	ft_putstr("-------------------------------\n");
 	while (++power < ah->nb_rooms)
 	{
-		ft_putnbr(count_shorter_path(ah, power));
+		count = count_shorter_path(ah, power);
+		if (count < 0)
+			ft_putstr("Bigger than MAXINT ");
+		else
+			ft_putnbr(count);
 		ft_putstr(" paths of Length ");
-		ft_putnbr(power);
+		ft_putnbr(power + 1);
 		ft_putchar('\n');
 		datas.m1 = power_adjacency(&datas);
 	}
