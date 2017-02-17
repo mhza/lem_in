@@ -6,7 +6,7 @@
 /*   By: mhaziza <mhaziza@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/14 20:39:03 by mhaziza           #+#    #+#             */
-/*   Updated: 2017/02/17 17:04:27 by mhaziza          ###   ########.fr       */
+/*   Updated: 2017/02/17 17:19:27 by mhaziza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static char	*get_rooms(char *ln, t_anthill *ah, char *input)
 {
-	if (ft_strchr(ln, ' ') && !ft_strchr(ln, '-') && !ft_strchr(ln, '#'))
+	if (!ft_strchr(ln, '#'))
 	{
 		ah->nb_rooms += 1;
 		if (!(ah->rooms = set_id_rooms(ah, ah->rooms, ln)))

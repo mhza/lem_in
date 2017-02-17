@@ -6,7 +6,7 @@
 /*   By: mhaziza <mhaziza@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/14 20:43:16 by mhaziza           #+#    #+#             */
-/*   Updated: 2017/02/17 16:58:32 by mhaziza          ###   ########.fr       */
+/*   Updated: 2017/02/17 17:24:42 by mhaziza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ int	end_start_linked(t_anthill *ah)
 			is_start = 1;
 	is_end = 0;
 	i = -1;
-	while (++i < ah->nb_rooms && !is_start)
+	while (++i < ah->nb_rooms && !is_end)
 		if (ah->adjacency[ah->id_end][i])
-			is_start = 1;
+			is_end = 1;
 	if (!is_start || !is_end)
 		return (0);
 	return (1);

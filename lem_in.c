@@ -6,7 +6,7 @@
 /*   By: mhaziza <mhaziza@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/14 14:15:40 by mhaziza           #+#    #+#             */
-/*   Updated: 2017/02/17 17:04:53 by mhaziza          ###   ########.fr       */
+/*   Updated: 2017/02/17 17:25:38 by mhaziza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,7 @@ int			main(int ac, char **av)
 	init_struct(&ah);
 	if (!get_anthill(0, &ah))
 		return (ret_putstr_fd("ERROR", 2));
+	debug_input(&ah);
 	if (end_start_linked(&ah))
 		call_bfs(&ah, &bfs);
 	else
