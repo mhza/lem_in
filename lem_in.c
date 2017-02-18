@@ -6,7 +6,7 @@
 /*   By: mhaziza <mhaziza@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/14 14:15:40 by mhaziza           #+#    #+#             */
-/*   Updated: 2017/02/18 21:11:43 by mhaziza          ###   ########.fr       */
+/*   Updated: 2017/02/18 21:23:27 by mhaziza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static int	ret_putstr_fd(char *str, int fd)
 		return (1);
 }
 
-void		init_struct(t_anthill *ah)
+int		init_struct(t_anthill *ah)
 {
 	ft_bzero(ah, sizeof(t_anthill));
 	if (!(ah->rooms = (char**)malloc(sizeof(char*))))
@@ -92,7 +92,8 @@ int			main(int ac, char **av)
 	if (ac > 2 || (av[1] && ft_strcmp(av[1], "-info")
 						&& ft_strcmp(av[1], "-all")))
 		return (ret_putstr_fd("Usage : ./lem-in [-info][-all] < filename", 2));
-	init_struct(&ah);
+	if (!init_struct(&ah))
+		return (0);
 	if (!get_anthill(0, &ah))
 		return (ret_putstr_fd("ERROR", 2));
 	if (end_start_linked(&ah))
