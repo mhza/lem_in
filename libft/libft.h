@@ -6,7 +6,7 @@
 /*   By: mhaziza <mhaziza@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/17 18:06:02 by mhaziza           #+#    #+#             */
-/*   Updated: 2017/01/28 19:52:08 by mhaziza          ###   ########.fr       */
+/*   Updated: 2017/02/18 19:34:17 by mhaziza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ typedef struct		s_list
 # define READ_LINE 1
 # define READ_END 0
 # define READ_ERROR -1
-# define BUFF_SIZE 500000
+# define BUFF_SIZE 5
 
 int					get_next_line(const int fd, char **line);
 void				*ft_memset(void *s, int c, size_t n);

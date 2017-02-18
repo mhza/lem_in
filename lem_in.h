@@ -6,7 +6,7 @@
 /*   By: mhaziza <mhaziza@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/14 14:13:28 by mhaziza           #+#    #+#             */
-/*   Updated: 2017/02/18 15:33:24 by mhaziza          ###   ########.fr       */
+/*   Updated: 2017/02/18 18:22:04 by mhaziza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,15 +49,21 @@ typedef struct	s_power_m
 	int	n;
 }				t_power_m;
 
-char			*ft_strreal(char *s1, char *s2);
+typedef struct	s_line
+{
+	char			*ln;
+	struct s_line	*next;
+}				t_line;
+
+t_line			*ft_strreal(t_line *tline, char *line);
 
 int				get_anthill(int fd, t_anthill *ah);
 
 int				get_id_room(char **ids, char *name);
 char			*get_room_by_id(t_anthill *ah, int id);
 
-char			*get_rooms(char *ln, t_anthill *ah, char *input);
-char			*get_tubes(char *ln, t_anthill *ah, char *input);
+t_line			*get_rooms(char *ln, t_anthill *ah, t_line *input);
+t_line			*get_tubes(char *ln, t_anthill *ah, t_line *input);
 
 int				init_adjacency_map(t_anthill *ah);
 int				**set_adjacency(int **map, int id1, int id2);

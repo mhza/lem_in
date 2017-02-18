@@ -6,7 +6,7 @@
 /*   By: mhaziza <mhaziza@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/14 20:39:03 by mhaziza           #+#    #+#             */
-/*   Updated: 2017/02/18 15:40:14 by mhaziza          ###   ########.fr       */
+/*   Updated: 2017/02/18 19:39:27 by mhaziza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,17 +42,29 @@ static int		free_and_return(int ret, char *ln)
 	return (0);
 }
 
-static int		putstr_and_free(char *input)
+static int		putstr_and_free(t_line *input)
 {
-	ft_putstr(input);
-	free(input);
+	t_line	*tmp;
+
+	while (input && input->next)
+	{
+		ft_putstr(input->ln);
+		input = input->next;
+	}
+	while (input)
+	{
+		tmp = input->next;
+		free(input->ln);
+		free(input->next);
+		input = tmp;
+	}
 	return (1);
 }
 
 int				get_anthill(int fd, t_anthill *ah)
 {
 	char	*ln;
-	char	*input;
+	t_line	*input;
 	int		ret;
 
 	ret = get_next_line(fd, &ln);
@@ -62,7 +74,7 @@ int				get_anthill(int fd, t_anthill *ah)
 	if (!ln[0] || (ah->ants = ft_atoi(ln)) < 1)
 		return (free_and_return(ret, ln));
 	free(ln);
-	while ((ret = get_next_line(fd, &ln)) && is_room(ln) && ln[0])
+	while ((ret = get_next_line(fd, &ln)) && ln && ln[0] && is_room(ln))
 		if (!(input = get_rooms(ln, ah, input)))
 			return (0);
 	if (ah->id_start == -1 || ah->id_end == -1 || !ah->nb_rooms)
@@ -71,8 +83,9 @@ int				get_anthill(int fd, t_anthill *ah)
 		return (0);
 	if (!(input = get_tubes(ln, ah, input)))
 		return (0);
-	while (get_next_line(fd, &ln) && ln[0])
+	while (get_next_line(fd, &ln) && ln && ln[0])
 		if (!(input = get_tubes(ln, ah, input)))
 			return (0);
-	return (putstr_and_free(input));
+	putstr_and_free(input);
+	return (1);
 }

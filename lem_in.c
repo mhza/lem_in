@@ -6,33 +6,29 @@
 /*   By: mhaziza <mhaziza@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/14 14:15:40 by mhaziza           #+#    #+#             */
-/*   Updated: 2017/02/18 15:42:14 by mhaziza          ###   ########.fr       */
+/*   Updated: 2017/02/18 21:11:43 by mhaziza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-char		*ft_strreal(char *s1, char *s2)
+t_line		*ft_strreal(t_line *tline, char *line)
 {
-	char	*new;
+	t_line	*new;
 
-	new = NULL;
-	if ((s1 == NULL || *s1 == '\0') && s2)
-	{
-		if ((new = ft_strnew(ft_strlen(s2) + 1)) == NULL)
-			return (NULL);
-	}
+	if (!(new = malloc(sizeof(t_line))))
+		return (NULL);
+	if (!(new->ln = malloc(ft_strlen(line) + 2)))
+		return (NULL);
+	new->ln = ft_strcpy(new->ln, line);
+	new->ln[ft_strlen(line)] = '\n';
+	new->ln[ft_strlen(line) + 1] = '\0';
+	if (!tline)
+		new->next = NULL;
 	else
-	{
-		if ((new = ft_strnew(ft_strlen(s1) + ft_strlen(s2) + 1)) == NULL)
-			return (NULL);
-		ft_strcpy(new, s1);
-	}
-	ft_strcat(new, s2);
-	new[ft_strlen(new)] = '\n';
-	new[ft_strlen(new)] = '\0';
-	free(s1);
-	return (new);
+		new->next = tline;
+	tline = new;
+	return (tline);
 }
 
 static int	ret_putstr_fd(char *str, int fd)
@@ -48,14 +44,17 @@ static int	ret_putstr_fd(char *str, int fd)
 void		init_struct(t_anthill *ah)
 {
 	ft_bzero(ah, sizeof(t_anthill));
-	ah->rooms = (char**)malloc(sizeof(char*));
+	if (!(ah->rooms = (char**)malloc(sizeof(char*))))
+		return (0);
 	ah->rooms[0] = 0;
-	ah->tubes = (char**)malloc(sizeof(char*));
+	if (!(ah->tubes = (char**)malloc(sizeof(char*))))
+		return (0);
 	ah->tubes[0] = 0;
 	ah->id_start = -1;
 	ah->id_end = -1;
 	ah->nb_rooms = 0;
 	ah->nb_tubes = 0;
+	return (1);
 }
 
 int			free_all(t_anthill *ah, t_bfs *bfs, int ret)

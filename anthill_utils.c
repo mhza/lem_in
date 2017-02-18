@@ -6,7 +6,7 @@
 /*   By: mhaziza <mhaziza@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/16 09:39:41 by mhaziza           #+#    #+#             */
-/*   Updated: 2017/02/18 15:34:51 by mhaziza          ###   ########.fr       */
+/*   Updated: 2017/02/18 18:21:55 by mhaziza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ static char	**set_tube(t_anthill *ah, char **tubes, char **rooms, char *ln)
 	return (ah->tubes);
 }
 
-char		*get_rooms(char *ln, t_anthill *ah, char *input)
+t_line		*get_rooms(char *ln, t_anthill *ah, t_line *input)
 {
 	if (!ft_strchr(ln, '#'))
 	{
@@ -108,7 +108,7 @@ char		*get_rooms(char *ln, t_anthill *ah, char *input)
 	return (input);
 }
 
-char		*get_tubes(char *ln, t_anthill *ah, char *input)
+t_line		*get_tubes(char *ln, t_anthill *ah, t_line *input)
 {
 	ah->nb_tubes += 1;
 	if (!(ah->tubes = set_tube(ah, ah->tubes, ah->rooms, ln)))
