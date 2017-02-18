@@ -6,7 +6,7 @@
 /*   By: mhaziza <mhaziza@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/14 14:15:40 by mhaziza           #+#    #+#             */
-/*   Updated: 2017/02/18 21:23:27 by mhaziza          ###   ########.fr       */
+/*   Updated: 2017/02/18 22:02:27 by mhaziza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,9 @@
 t_line		*ft_strreal(t_line *tline, char *line)
 {
 	t_line	*new;
+	t_line	*tmp;
 
+	tmp = tline;
 	if (!(new = malloc(sizeof(t_line))))
 		return (NULL);
 	if (!(new->ln = malloc(ft_strlen(line) + 2)))
@@ -23,12 +25,14 @@ t_line		*ft_strreal(t_line *tline, char *line)
 	new->ln = ft_strcpy(new->ln, line);
 	new->ln[ft_strlen(line)] = '\n';
 	new->ln[ft_strlen(line) + 1] = '\0';
+	new->next = NULL;
+	while (tline && tline->next)
+		tline = tline->next;
 	if (!tline)
-		new->next = NULL;
+		return (new);
 	else
-		new->next = tline;
-	tline = new;
-	return (tline);
+		tline->next = new;
+	return (tmp);
 }
 
 static int	ret_putstr_fd(char *str, int fd)
@@ -41,7 +45,7 @@ static int	ret_putstr_fd(char *str, int fd)
 		return (1);
 }
 
-int		init_struct(t_anthill *ah)
+int			init_struct(t_anthill *ah)
 {
 	ft_bzero(ah, sizeof(t_anthill));
 	if (!(ah->rooms = (char**)malloc(sizeof(char*))))

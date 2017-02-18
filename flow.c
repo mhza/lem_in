@@ -6,7 +6,7 @@
 /*   By: mhaziza <mhaziza@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/16 15:06:03 by mhaziza           #+#    #+#             */
-/*   Updated: 2017/02/18 21:07:58 by mhaziza          ###   ########.fr       */
+/*   Updated: 2017/02/18 21:47:23 by mhaziza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	sample(t_anthill *a, int *p, int ant, int room)
 {
-	if (room != a->id_start)
+	if (p[room] != a->id_start)
 	{
 		ft_putstr("L");
 		ft_putnbr(ant);
