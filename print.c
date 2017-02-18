@@ -6,7 +6,7 @@
 /*   By: mhaziza <mhaziza@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/18 11:54:40 by mhaziza           #+#    #+#             */
-/*   Updated: 2017/02/18 15:45:57 by mhaziza          ###   ########.fr       */
+/*   Updated: 2017/02/18 21:26:05 by mhaziza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ void	print_info(t_anthill *ah)
 		datas.m1 = power_adjacency(&datas);
 		power++;
 	}
-	power++;
 	ft_putstr("----------------------------------\n");
 	ft_putstr("Length of shorter path       ");
 	ft_putnbr(power);
@@ -58,7 +57,7 @@ void	print_all_info(t_anthill *ah)
 		else
 			ft_putnbr(count);
 		ft_putstr(" paths of Length ");
-		ft_putnbr(power + 1);
+		ft_putnbr(power);
 		ft_putchar('\n');
 		datas.m1 = power_adjacency(&datas);
 	}
