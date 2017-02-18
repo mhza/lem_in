@@ -6,7 +6,7 @@
 /*   By: mhaziza <mhaziza@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/14 20:39:03 by mhaziza           #+#    #+#             */
-/*   Updated: 2017/02/18 22:21:09 by mhaziza          ###   ########.fr       */
+/*   Updated: 2017/02/18 22:52:18 by mhaziza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,9 +67,9 @@ int				get_anthill(int fd, t_anthill *ah)
 	t_line	*input;
 	int		ret;
 
-	ret = get_next_line(fd, &ln);
-	input = NULL;
-	if (!(input = ft_strreal(input, ln)))
+	if ((ret = get_next_line(fd, &ln)) == -1)
+		return (0);
+	if (!(input = ft_strreal(NULL, ln)))
 		return (0);
 	if (!ln[0] || (ah->ants = ft_atoi(ln)) < 1)
 		return (free_and_return(ret, ln));
