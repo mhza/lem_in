@@ -6,7 +6,7 @@
 /*   By: mhaziza <mhaziza@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/17 17:00:33 by mhaziza           #+#    #+#             */
-/*   Updated: 2017/02/17 23:40:49 by mhaziza          ###   ########.fr       */
+/*   Updated: 2017/02/18 15:19:34 by mhaziza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,54 +47,23 @@ int		count_shorter_path(t_anthill *ah, int power_path)
 	return (datas.m1[ah->id_start][ah->id_end]);
 }
 
-void	print_info(t_anthill *ah)
+int		get_id_room(char **ids, char *name)
 {
-	t_power_m	datas;
-	int			power;
+	int	i;
 
-	datas.m1 = ah->adjacency;
-	datas.m2 = ah->adjacency;
-	datas.n = ah->nb_rooms;
-	datas.i = 0;
-	datas.j = 0;
-	power = 1;
-	while (!datas.m1[ah->id_start][ah->id_end])
+	i = 0;
+	while (ids && ids[i])
 	{
-		datas.m1 = power_adjacency(&datas);
-		power++;
+		if (!ft_strcmp(ids[i], name))
+			return (i);
+		i++;
 	}
-	power++;
-	ft_putstr("----------------------------------\n");
-	ft_putstr("Length of shorter path       ");
-	ft_putnbr(power);
-	ft_putstr("\nNumber of shorter paths      ");
-	ft_putnbr(datas.m1[ah->id_start][ah->id_end]);
-	ft_putchar('\n');
+	return (-1);
 }
 
-void	print_all_info(t_anthill *ah)
+char	*get_room_by_id(t_anthill *ah, int id)
 {
-	t_power_m	datas;
-	int			power;
-	int			count;
-
-	datas.m1 = ah->adjacency;
-	datas.m2 = ah->adjacency;
-	datas.n = ah->nb_rooms;
-	datas.i = 0;
-	datas.j = 0;
-	power = 0;
-	ft_putstr("-------------------------------\n");
-	while (++power < ah->nb_rooms)
-	{
-		count = count_shorter_path(ah, power);
-		if (count < 0)
-			ft_putstr("Bigger than MAXINT ");
-		else
-			ft_putnbr(count);
-		ft_putstr(" paths of Length ");
-		ft_putnbr(power + 1);
-		ft_putchar('\n');
-		datas.m1 = power_adjacency(&datas);
-	}
+	if (ah && ah->rooms && id < ah->nb_rooms)
+		return (ah->rooms[id]);
+	return (NULL);
 }

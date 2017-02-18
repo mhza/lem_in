@@ -6,7 +6,7 @@
 /*   By: mhaziza <mhaziza@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/14 14:15:40 by mhaziza           #+#    #+#             */
-/*   Updated: 2017/02/17 23:00:32 by mhaziza          ###   ########.fr       */
+/*   Updated: 2017/02/18 15:42:14 by mhaziza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void		init_struct(t_anthill *ah)
 	ah->nb_tubes = 0;
 }
 
-void		free_all(t_anthill *ah, t_bfs *bfs)
+int			free_all(t_anthill *ah, t_bfs *bfs, int ret)
 {
 	int i;
 
@@ -82,6 +82,7 @@ void		free_all(t_anthill *ah, t_bfs *bfs)
 		free(bfs->mked);
 		free(bfs->tmp);
 	}
+	return (ret);
 }
 
 int			main(int ac, char **av)
@@ -89,8 +90,8 @@ int			main(int ac, char **av)
 	t_anthill	ah;
 	t_bfs		bfs;
 
-	if (ac > 2 ||
-		(av[1] && ft_strcmp(av[1], "-info") && ft_strcmp(av[1], "-all")))
+	if (ac > 2 || (av[1] && ft_strcmp(av[1], "-info")
+						&& ft_strcmp(av[1], "-all")))
 		return (ret_putstr_fd("Usage : ./lem-in [-info][-all] < filename", 2));
 	init_struct(&ah);
 	if (!get_anthill(0, &ah))
@@ -98,15 +99,13 @@ int			main(int ac, char **av)
 	if (end_start_linked(&ah))
 		call_bfs(&ah, &bfs);
 	else
-	{
-		free_all(&ah, NULL);
-		return (0);
-	}
+		return (free_all(&ah, NULL, 0));
 	print_flow(&ah, bfs.path, bfs.deg[bfs.p]);
-	if (ac == 2 && !ft_strcmp(av[1], "-info"))
-		print_info(&ah);
-	if (ac == 2 && !ft_strcmp(av[1], "-all"))
+	if (ac == 1)
+		return (free_all(&ah, &bfs, 1));
+	print_path(&ah, &bfs);
+	print_info(&ah);
+	if (!ft_strcmp(av[1], "-all"))
 		print_all_info(&ah);
-	free_all(&ah, &bfs);
-	return (1);
+	return (free_all(&ah, &bfs, 1));
 }

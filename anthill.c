@@ -6,54 +6,50 @@
 /*   By: mhaziza <mhaziza@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/14 20:39:03 by mhaziza           #+#    #+#             */
-/*   Updated: 2017/02/17 20:18:37 by mhaziza          ###   ########.fr       */
+/*   Updated: 2017/02/18 15:40:14 by mhaziza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-static char	*get_rooms(char *ln, t_anthill *ah, char *input)
+static int		is_room(char *ln)
 {
-	if (!ft_strchr(ln, '#'))
-	{
-		ah->nb_rooms += 1;
-		if (!(ah->rooms = set_id_rooms(ah, ah->rooms, ln)))
-			return (NULL);
-	}
-	else if (!ft_strcmp(ln, "##start"))
-		ah->id_start = ah->nb_rooms;
-	else if (!ft_strcmp(ln, "##end"))
-		ah->id_end = ah->nb_rooms;
-	input = ft_strreal(input, ln);
-	free(ln);
-	return (input);
+	int i;
+
+	if (!ft_strcmp(ln, "##start") || !ft_strcmp(ln, "##end") || ln[0] == '#')
+		return (1);
+	i = ft_strlen(ln) - 1;
+	while (i && ft_isdigit(ln[i]))
+		i--;
+	if (ln[i] != ' ' && ln[i] != '-')
+		return (0);
+	i = ln[i] == '-' ? i - 2 : i - 1;
+	while (i && ft_isdigit(ln[i]))
+		i--;
+	if (ln[i] != ' ' && ln[i] != '-')
+		return (0);
+	i = ln[i] == '-' ? i - 1 : i;
+	while (--i)
+		if (ln[i] == '-')
+			return (0);
+	return (1);
 }
 
-static char	*get_tubes(char *ln, t_anthill *ah, char *input)
-{
-	ah->nb_tubes += 1;
-	if (!(ah->tubes = set_tube(ah, ah->tubes, ah->rooms, ln)))
-		return (NULL);
-	input = ft_strreal(input, ln);
-	free(ln);
-	return (input);
-}
-
-int			free_and_return(int ret, char *ln)
+static int		free_and_return(int ret, char *ln)
 {
 	if (ret)
 		free(ln);
 	return (0);
 }
 
-int			putstr_and_free(char *input)
+static int		putstr_and_free(char *input)
 {
 	ft_putstr(input);
 	free(input);
 	return (1);
 }
 
-int			get_anthill(int fd, t_anthill *ah)
+int				get_anthill(int fd, t_anthill *ah)
 {
 	char	*ln;
 	char	*input;
@@ -66,7 +62,7 @@ int			get_anthill(int fd, t_anthill *ah)
 	if (!ln[0] || (ah->ants = ft_atoi(ln)) < 1)
 		return (free_and_return(ret, ln));
 	free(ln);
-	while ((ret = get_next_line(fd, &ln)) && !ft_strchr(ln, '-') && ln[0])
+	while ((ret = get_next_line(fd, &ln)) && is_room(ln) && ln[0])
 		if (!(input = get_rooms(ln, ah, input)))
 			return (0);
 	if (ah->id_start == -1 || ah->id_end == -1 || !ah->nb_rooms)

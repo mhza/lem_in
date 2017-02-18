@@ -6,7 +6,7 @@
 /*   By: mhaziza <mhaziza@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/14 14:13:28 by mhaziza           #+#    #+#             */
-/*   Updated: 2017/02/17 22:57:02 by mhaziza          ###   ########.fr       */
+/*   Updated: 2017/02/18 15:33:24 by mhaziza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,9 @@ int				get_anthill(int fd, t_anthill *ah);
 
 int				get_id_room(char **ids, char *name);
 char			*get_room_by_id(t_anthill *ah, int id);
-char			**set_id_rooms(t_anthill *ah, char **ids, char *ln);
-char			**set_tube(t_anthill *ah, char **tubes, char **rooms, char *ln);
+
+char			*get_rooms(char *ln, t_anthill *ah, char *input);
+char			*get_tubes(char *ln, t_anthill *ah, char *input);
 
 int				init_adjacency_map(t_anthill *ah);
 int				**set_adjacency(int **map, int id1, int id2);
@@ -75,4 +76,5 @@ int				shorter_path_size(t_anthill *ah);
 int				count_shorter_path(t_anthill *ah, int power_path);
 void			print_info(t_anthill *ah);
 void			print_all_info(t_anthill *ah);
+void			print_path(t_anthill *ah, t_bfs *bfs);
 #endif
