@@ -6,7 +6,7 @@
 /*   By: mhaziza <mhaziza@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/16 15:06:03 by mhaziza           #+#    #+#             */
-/*   Updated: 2017/02/18 21:47:23 by mhaziza          ###   ########.fr       */
+/*   Updated: 2017/02/18 22:25:17 by mhaziza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,6 @@ static void	print_out(t_anthill *a, int *p, int d)
 
 void		print_flow(t_anthill *a, int *p, int d)
 {
-	ft_putchar('\n');
 	print_in(a, p, d);
 	if (a->ants - d - 1 > 0)
 		print_flowing(a, p, d);
