@@ -6,7 +6,7 @@
 /*   By: mhaziza <mhaziza@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/14 20:39:03 by mhaziza           #+#    #+#             */
-/*   Updated: 2017/02/18 19:39:27 by mhaziza          ###   ########.fr       */
+/*   Updated: 2017/02/18 22:21:09 by mhaziza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static int		putstr_and_free(t_line *input)
 {
 	t_line	*tmp;
 
-	while (input && input->next)
+	while (input)
 	{
 		ft_putstr(input->ln);
 		input = input->next;
