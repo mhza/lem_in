@@ -6,7 +6,7 @@
 /*   By: mhaziza <mhaziza@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/15 17:35:24 by mhaziza           #+#    #+#             */
-/*   Updated: 2017/02/17 21:50:40 by mhaziza          ###   ########.fr       */
+/*   Updated: 2017/02/19 16:09:25 by mhaziza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,12 +65,12 @@ void	print_power(t_anthill *ah)
 	datas.i = 0;
 	datas.j = 0;
 	printf(">>>   ADJACENCY MAP POWER 2\n");
-	datas.m1 = power_adjacency(&datas);
+	datas.m1 = power_adjacency(&datas, 0);
 	ft_puttab_int(datas.m1, ah->nb_rooms, ah->nb_rooms);
 	printf(">>>   ADJACENCY MAP POWER 3\n");
-	datas.m1 = power_adjacency(&datas);
+	datas.m1 = power_adjacency(&datas, 1);
 	ft_puttab_int(datas.m1, ah->nb_rooms, ah->nb_rooms);
 	printf(">>>   ADJACENCY MAP POWER 4\n");
-	datas.m1 = power_adjacency(&datas);
+	datas.m1 = power_adjacency(&datas, 1);
 	ft_puttab_int(datas.m1, ah->nb_rooms, ah->nb_rooms);
 }

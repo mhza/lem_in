@@ -6,7 +6,7 @@
 /*   By: mhaziza <mhaziza@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/14 20:43:16 by mhaziza           #+#    #+#             */
-/*   Updated: 2017/02/17 17:24:42 by mhaziza          ###   ########.fr       */
+/*   Updated: 2017/02/19 16:17:07 by mhaziza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	calc_value_ij(t_power_m *datas)
 	return (value);
 }
 
-int	**power_adjacency(t_power_m *datas)
+int	**power_adjacency(t_power_m *datas, int free_m1)
 {
 	int	**ret;
 
@@ -63,6 +63,13 @@ int	**power_adjacency(t_power_m *datas)
 			datas->j++;
 		}
 		datas->i++;
+	}
+	if (free_m1)
+	{
+		datas->i = -1;
+		while (datas->m1 && ++datas->i < datas->n)
+			free(datas->m1[datas->i]);
+		free(datas->m1);
 	}
 	return (ret);
 }

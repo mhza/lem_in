@@ -6,7 +6,7 @@
 /*   By: mhaziza <mhaziza@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/17 17:00:33 by mhaziza           #+#    #+#             */
-/*   Updated: 2017/02/18 15:19:34 by mhaziza          ###   ########.fr       */
+/*   Updated: 2017/02/19 16:23:47 by mhaziza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int		shorter_path_size(t_anthill *ah)
 	power = 1;
 	while (!datas.m1[ah->id_start][ah->id_end])
 	{
-		datas.m1 = power_adjacency(&datas);
+		datas.m1 = power_adjacency(&datas, power - 1);
 		power++;
 	}
 	return (power);
@@ -43,7 +43,7 @@ int		count_shorter_path(t_anthill *ah, int power_path)
 	datas.j = 0;
 	power = 0;
 	while (++power < power_path)
-		datas.m1 = power_adjacency(&datas);
+		datas.m1 = power_adjacency(&datas, power - 1);
 	return (datas.m1[ah->id_start][ah->id_end]);
 }
 

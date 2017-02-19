@@ -6,7 +6,7 @@
 /*   By: mhaziza <mhaziza@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/14 14:13:28 by mhaziza           #+#    #+#             */
-/*   Updated: 2017/02/19 12:49:49 by mhaziza          ###   ########.fr       */
+/*   Updated: 2017/02/19 16:10:01 by mhaziza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ t_line			*get_tubes(char *ln, t_anthill *ah, t_line *input);
 
 int				init_adjacency_map(t_anthill *ah);
 int				**set_adjacency(int **map, int id1, int id2);
-int				**power_adjacency(t_power_m *datas);
+int				**power_adjacency(t_power_m *datas, int free_m1);
 int				end_start_linked(t_anthill *ah);
 
 int				*call_bfs(t_anthill *ah, t_bfs *bfs);

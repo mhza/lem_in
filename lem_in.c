@@ -6,7 +6,7 @@
 /*   By: mhaziza <mhaziza@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/14 14:15:40 by mhaziza           #+#    #+#             */
-/*   Updated: 2017/02/19 13:28:19 by mhaziza          ###   ########.fr       */
+/*   Updated: 2017/02/19 16:38:55 by mhaziza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,9 +76,9 @@ int			free_all(t_anthill *ah, t_bfs *bfs, int ret)
 		free(ah->adjacency[i]);
 	free(ah->rooms);
 	free(ah->tubes);
+	free(ah->adjacency);
 	if (bfs)
 	{
-		free(ah->adjacency);
 		free(bfs->deg);
 		free(bfs->path);
 		free(bfs->prev);
