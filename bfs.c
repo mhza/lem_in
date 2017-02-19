@@ -6,13 +6,13 @@
 /*   By: mhaziza <mhaziza@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/15 17:05:45 by mhaziza           #+#    #+#             */
-/*   Updated: 2017/02/18 22:36:59 by mhaziza          ###   ########.fr       */
+/*   Updated: 2017/02/19 20:53:20 by mhaziza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-static int	set_path(t_bfs *bfs)
+int			set_path(t_bfs *bfs)
 {
 	int i;
 	int deg_p;
@@ -31,17 +31,17 @@ static int	set_path(t_bfs *bfs)
 	return (1);
 }
 
-static int	init(t_bfs *bfs, int size, t_anthill *ah)
+static int	init(t_bfs *bfs, int size, t_anthill *ah, int is_opti)
 {
 	int	i;
 
-	if (!(bfs->deg = (int*)malloc(sizeof(int) * size)))
+	if (!is_opti && !(bfs->deg = (int*)malloc(sizeof(int) * size)))
 		return (0);
-	if (!(bfs->prev = (int*)malloc(sizeof(int) * size)))
+	if (!is_opti && !(bfs->prev = (int*)malloc(sizeof(int) * size)))
 		return (0);
-	if (!(bfs->mked = (int*)malloc(sizeof(int) * size)))
+	if (!is_opti && !(bfs->mked = (int*)malloc(sizeof(int) * size)))
 		return (0);
-	if (!(bfs->tmp = (int*)malloc(sizeof(int) * size)))
+	if (!is_opti && !(bfs->tmp = (int*)malloc(sizeof(int) * size)))
 		return (0);
 	i = -1;
 	while (++i < size)
@@ -73,7 +73,7 @@ int			get_deg_min(t_bfs *bfs, int size)
 	return (min);
 }
 
-static int	get_top_tmp(t_bfs *bfs, int size)
+int			get_top_tmp(t_bfs *bfs, int size)
 {
 	int	i;
 	int	min;
@@ -102,12 +102,12 @@ static int	get_top_tmp(t_bfs *bfs, int size)
 	return (-1);
 }
 
-int			*call_bfs(t_anthill *ah, t_bfs *bfs)
+int			*call_bfs(t_anthill *ah, t_bfs *bfs, int is_opti)
 {
 	int		i;
 	int		j;
 
-	if (!init(bfs, ah->nb_rooms, ah))
+	if (!init(bfs, ah->nb_rooms, ah, is_opti))
 		return (NULL);
 	while (!bfs->tmp[bfs->p] && (i = get_top_tmp(bfs, ah->nb_rooms)) != -1)
 	{

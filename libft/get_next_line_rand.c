@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_rand.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mhaziza <mhaziza@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/02 16:54:13 by mhaziza           #+#    #+#             */
-/*   Updated: 2017/02/19 18:26:10 by mhaziza          ###   ########.fr       */
+/*   Updated: 2017/02/19 17:23:10 by mhaziza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int		error_handling(char **stock)
 	return (-1);
 }
 
-int		get_next_line(const int fd, char **line)
+int		gnl_rand(const int fd, char **line, int ctrl)
 {
 	static char		*stock = NULL;
 	char			*str;
@@ -73,6 +73,9 @@ int		get_next_line(const int fd, char **line)
 		stock = ft_strnew(0);
 	while (!(ft_strchr(stock, '\n')))
 	{
+		if ((int)ft_strlen(stock) > ctrl && !ft_strchr(stock, '\n') &&
+		!ft_strchr(str, '\n'))
+			return (-1);
 		if (!(buffer_to_stock(fd, &stock, &bytes_read)))
 			return (error_handling(&stock));
 		if (bytes_read == 0)

@@ -6,34 +6,11 @@
 /*   By: mhaziza <mhaziza@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/14 14:15:40 by mhaziza           #+#    #+#             */
-/*   Updated: 2017/02/19 16:38:55 by mhaziza          ###   ########.fr       */
+/*   Updated: 2017/02/19 20:57:59 by mhaziza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
-
-t_line		*ft_strreal(t_line *tline, char *line)
-{
-	t_line	*new;
-	t_line	*tmp;
-
-	tmp = tline;
-	if (!(new = malloc(sizeof(t_line))))
-		return (NULL);
-	if (!(new->ln = malloc(ft_strlen(line) + 2)))
-		return (NULL);
-	new->ln = ft_strcpy(new->ln, line);
-	new->ln[ft_strlen(line)] = '\n';
-	new->ln[ft_strlen(line) + 1] = '\0';
-	new->next = NULL;
-	while (tline && tline->next)
-		tline = tline->next;
-	if (!tline)
-		return (new);
-	else
-		tline->next = new;
-	return (tmp);
-}
 
 static int	ret_putstr_fd(char *str, int fd)
 {
@@ -45,7 +22,7 @@ static int	ret_putstr_fd(char *str, int fd)
 		return (1);
 }
 
-int			init_struct(t_anthill *ah)
+static int	init_struct(t_anthill *ah)
 {
 	ft_bzero(ah, sizeof(t_anthill));
 	if (!(ah->rooms = (char**)malloc(sizeof(char*))))
@@ -61,7 +38,7 @@ int			init_struct(t_anthill *ah)
 	return (1);
 }
 
-int			free_all(t_anthill *ah, t_bfs *bfs, int ret)
+static int	free_all(t_anthill *ah, t_bfs *bfs, int ret)
 {
 	int i;
 
@@ -98,21 +75,21 @@ int			main(int ac, char **av)
 		return (ret_putstr_fd("Usage : ./lem-in [-info][-all] < filename", 2));
 	if (!init_struct(&ah))
 		return (0);
-	if (!get_anthill(0, &ah))
+	if (!get_anthill(&ah))
 	{
 		free_all(&ah, NULL, 0);
 		return (ret_putstr_fd("ERROR", 2));
 	}
 	if (end_start_linked(&ah))
-		call_bfs(&ah, &bfs);
+		call_bfs(&ah, &bfs, 0);
 	else
 		return (free_all(&ah, NULL, 0));
 	print_flow(&ah, bfs.path, bfs.deg[bfs.p]);
 	if (ac == 1)
 		return (free_all(&ah, &bfs, 1));
-	print_path(&ah, &bfs);
-	print_info(&ah);
-	if (!ft_strcmp(av[1], "-all"))
+	if (!ft_strcmp(av[1], "-info"))
+		print_info(&ah, &bfs);
+	else if (!ft_strcmp(av[1], "-all"))
 		print_all_info(&ah);
 	return (free_all(&ah, &bfs, 1));
 }

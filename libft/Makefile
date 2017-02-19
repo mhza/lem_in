@@ -6,7 +6,7 @@
 #    By: mhaziza <mhaziza@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/18 16:29:51 by mhaziza           #+#    #+#              #
-#    Updated: 2017/02/17 14:21:01 by mhaziza          ###   ########.fr        #
+#    Updated: 2017/02/19 17:01:32 by mhaziza          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,6 +15,7 @@ CFLAGS	= 	-Wall -Wextra -Werror -I.
 RM		=   @rm -f
 CC		=   @gcc
 SRCS	=   get_next_line.c \
+			get_next_line_rand.c \
 			ft_memset.c \
 			ft_bzero.c \
 			ft_memcpy.c \
@@ -39,6 +40,7 @@ SRCS	=   get_next_line.c \
 			ft_atoli.c \
 			ft_isalpha.c \
 			ft_isdigit.c \
+			ft_isdigitstr.c \
 			ft_isalnum.c \
 			ft_isascii.c \
 			ft_isprint.c \

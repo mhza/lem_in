@@ -1,18 +1,21 @@
 9
+##start
+start 3 3
 roa 3 3
 a 3 3
 aaa -3 3
 aaaaa 3 3
 room1 3 3
 room2 3 3
-##start
-start 3 3
 #comment
 room4 3 3
 ##end
 end 3 3
 room6 3 3
-room1-start
+room2-start
 room1-room1
 room1-room6
 room6-room2
+end-room2
+end-room6
+end-room4

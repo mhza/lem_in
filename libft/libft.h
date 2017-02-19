@@ -6,7 +6,7 @@
 /*   By: mhaziza <mhaziza@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/17 18:06:02 by mhaziza           #+#    #+#             */
-/*   Updated: 2017/02/18 19:34:17 by mhaziza          ###   ########.fr       */
+/*   Updated: 2017/02/19 17:29:07 by mhaziza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ typedef struct		s_list
 # define BUFF_SIZE 5
 
 int					get_next_line(const int fd, char **line);
+int					gnl_rand(const int fd, char **line, int ctrl);
 void				*ft_memset(void *s, int c, size_t n);
 void				ft_bzero(void *s, int n);
 void				*ft_memcpy (void *dest, const void *src, size_t n);
@@ -60,6 +61,7 @@ int					ft_atoi(const char *str);
 long				ft_atoli(const char *str);
 int					ft_isalpha(int c);
 int					ft_isdigit(int c);
+int					ft_isdigitstr(char *str);
 int					ft_isalnum(int c);
 int					ft_isascii(int c);
 int					ft_isprint(int c);
