@@ -6,7 +6,7 @@
 /*   By: mhaziza <mhaziza@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/16 09:39:41 by mhaziza           #+#    #+#             */
-/*   Updated: 2017/02/18 18:21:55 by mhaziza          ###   ########.fr       */
+/*   Updated: 2017/02/19 12:56:34 by mhaziza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ t_line		*get_rooms(char *ln, t_anthill *ah, t_line *input)
 	if (!ft_strchr(ln, '#'))
 	{
 		ah->nb_rooms += 1;
-		if (!(ah->rooms = set_id_rooms(ah, ah->rooms, ln)))
+		if (!(set_id_rooms(ah, ah->rooms, ln)))
 			return (NULL);
 	}
 	else if (!ft_strcmp(ln, "##start"))
@@ -111,7 +111,7 @@ t_line		*get_rooms(char *ln, t_anthill *ah, t_line *input)
 t_line		*get_tubes(char *ln, t_anthill *ah, t_line *input)
 {
 	ah->nb_tubes += 1;
-	if (!(ah->tubes = set_tube(ah, ah->tubes, ah->rooms, ln)))
+	if (!(set_tube(ah, ah->tubes, ah->rooms, ln)))
 		return (NULL);
 	input = ft_strreal(input, ln);
 	free(ln);

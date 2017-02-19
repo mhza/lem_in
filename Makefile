@@ -6,13 +6,13 @@
 #    By: mhaziza <mhaziza@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/02/14 17:16:56 by mhaziza           #+#    #+#              #
-#    Updated: 2017/02/18 11:58:50 by mhaziza          ###   ########.fr        #
+#    Updated: 2017/02/19 11:12:32 by mhaziza          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	=	lem-in
 CC		=   gcc
-CFLAGS	= 	-Wall -Wextra -Werror -I.
+CFLAGS	= 	-Wall -Wextra -Werror -I. -g
 RM		=   rm -f
 LIBFT	=	 -L./libft -lft
 SRCS	=	lem_in.c \

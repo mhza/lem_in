@@ -6,7 +6,7 @@
 /*   By: mhaziza <mhaziza@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/14 14:15:40 by mhaziza           #+#    #+#             */
-/*   Updated: 2017/02/18 22:02:27 by mhaziza          ###   ########.fr       */
+/*   Updated: 2017/02/19 13:28:19 by mhaziza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,13 +66,13 @@ int			free_all(t_anthill *ah, t_bfs *bfs, int ret)
 	int i;
 
 	i = -1;
-	while (++i < ah->nb_rooms)
+	while (ah->rooms && ++i < ah->nb_rooms)
 		free(ah->rooms[i]);
 	i = -1;
-	while (++i < ah->nb_tubes)
+	while (ah->tubes && ++i < ah->nb_tubes)
 		free(ah->tubes[i]);
 	i = -1;
-	while (++i < ah->nb_rooms)
+	while (ah->adjacency && ++i < ah->nb_rooms)
 		free(ah->adjacency[i]);
 	free(ah->rooms);
 	free(ah->tubes);
@@ -99,7 +99,10 @@ int			main(int ac, char **av)
 	if (!init_struct(&ah))
 		return (0);
 	if (!get_anthill(0, &ah))
+	{
+		free_all(&ah, NULL, 0);
 		return (ret_putstr_fd("ERROR", 2));
+	}
 	if (end_start_linked(&ah))
 		call_bfs(&ah, &bfs);
 	else
