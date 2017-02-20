@@ -6,7 +6,7 @@
 /*   By: mhaziza <mhaziza@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 12:42:42 by mhaziza           #+#    #+#             */
-/*   Updated: 2017/02/20 16:11:48 by mhaziza          ###   ########.fr       */
+/*   Updated: 2017/02/20 17:02:30 by mhaziza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,10 +99,10 @@ void	get_opti(t_anthill *ah, t_bfs *bfs)
 		distrib.deg[0] = bfs->deg[bfs->p];
 		distrib.deg[1] = remove_shorter(ah, bfs);
 	}
-	else
+	if (!n || distrib.deg[1] < 2)
 		return ;
 	count = 1;
-	while (is_optimisable(ah) && ++count)
+	while (is_optimisable(ah) && distrib.deg[count] > 2 &&  ++count)
 		distrib.deg[count] = remove_shorter(ah, bfs);
 	do_distrib(&distrib, count + 1, ah->ants);
 	print_info_distrib(&distrib, count);
