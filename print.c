@@ -6,7 +6,7 @@
 /*   By: mhaziza <mhaziza@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/18 11:54:40 by mhaziza           #+#    #+#             */
-/*   Updated: 2017/02/19 21:04:59 by mhaziza          ###   ########.fr       */
+/*   Updated: 2017/02/19 22:07:34 by mhaziza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,19 @@ void		print_path_opti(t_anthill *ah, t_bfs *bfs)
 
 void		print_info(t_anthill *ah, t_bfs *bfs)
 {
-	ft_putstr("-------------------------------------------\n");
-	ft_putstr("All separated paths from start to end are :\n");
+	ft_putstr("------------------------------------------------\n");
+	ft_putstr("Cost using only the shortest path is : ");
+	ft_putnbr(ah->ants + bfs->deg[bfs->p] - 1);
+	ft_putstr("\n------------------------------------------------\n");
+	ft_putstr("All separated paths from ");
+	ft_putstr(get_room_by_id(ah, ah->id_start));
+	ft_putstr(" to ");
+	ft_putstr(get_room_by_id(ah, ah->id_end));
+	ft_putstr(" are :\n");
 	print_path(ah, bfs);
 	while (is_optimisable(ah))
 		remove_shorter(ah, bfs);
-	ft_putstr("-------------------------------------------\n");
+	ft_putstr("------------------------------------------------\n");
 }
 
 static void	pattern_all(int power, int count)
