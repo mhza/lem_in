@@ -6,7 +6,7 @@
 /*   By: mhaziza <mhaziza@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/18 11:54:40 by mhaziza           #+#    #+#             */
-/*   Updated: 2017/02/20 16:07:55 by mhaziza          ###   ########.fr       */
+/*   Updated: 2017/02/20 17:09:13 by mhaziza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 void		print_info(t_anthill *ah, t_bfs *bfs)
 {
-	ft_putstr("------------------------------------------------\n");
-	ft_putstr("Steps using the shortest path :\n");
+	ft_putstr("-----------------------------------------------------\n");
+	ft_putstr("Steps using the shortest path : ");
 	ft_putnbr(ah->ants + bfs->deg[bfs->p] - 1);
-	ft_putstr("\n------------------------------------------------\n");
+	ft_putstr("\n-----------------------------------------------------\n");
 	ft_putstr("All parallel paths from start to finish :\n");
 	print_path(ah, bfs);
 }
@@ -26,7 +26,7 @@ void		print_info_distrib(t_distrib *distrib, int count)
 {
 	int	i;
 
-	ft_putstr("------------------------------------------------\n");
+	ft_putstr("-----------------------------------------------------\n");
 	ft_putstr("Distribution of ants in each path :\n");
 	i = -1;
 	while (++i < count + 1)
@@ -34,10 +34,10 @@ void		print_info_distrib(t_distrib *distrib, int count)
 		ft_putnbr(distrib->ants[i]);
 		ft_putchar('\n');
 	}
-	ft_putstr("------------------------------------------------\n");
-	ft_putstr("Total amount of steps with this optimization :\n");
+	ft_putstr("-----------------------------------------------------\n");
+	ft_putstr("Total amount of steps with this optimization : ");
 	ft_putnbr(global_cost(distrib, count));
-	ft_putstr("\n------------------------------------------------\n");
+	ft_putstr("\n-----------------------------------------------------\n");
 }
 
 static void	pattern_all(int power, int count)
