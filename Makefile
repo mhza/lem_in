@@ -6,7 +6,7 @@
 #    By: mhaziza <mhaziza@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/02/14 17:16:56 by mhaziza           #+#    #+#              #
-#    Updated: 2017/02/19 11:12:32 by mhaziza          ###   ########.fr        #
+#    Updated: 2017/02/20 12:43:49 by mhaziza          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,7 @@ SRCS	=	lem_in.c \
 			anthill_utils.c \
 			flow.c \
 			opti.c \
+			distrib.c \
 			print.c \
 
 OBJS	=   $(SRCS:.c=.o)

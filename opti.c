@@ -6,7 +6,7 @@
 /*   By: mhaziza <mhaziza@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/17 17:00:33 by mhaziza           #+#    #+#             */
-/*   Updated: 2017/02/19 21:01:42 by mhaziza          ###   ########.fr       */
+/*   Updated: 2017/02/20 13:45:37 by mhaziza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ char	*get_room_by_id(t_anthill *ah, int id)
 	return (NULL);
 }
 
-void	remove_shorter(t_anthill *ah, t_bfs *bfs)
+int		remove_shorter(t_anthill *ah, t_bfs *bfs)
 {
 	int	i;
 	int	j;
@@ -52,6 +52,7 @@ void	remove_shorter(t_anthill *ah, t_bfs *bfs)
 	free(bfs->path);
 	call_bfs(ah, bfs, 1);
 	print_path(ah, bfs);
+	return (bfs->deg[bfs->p]);
 }
 
 int		is_optimisable(t_anthill *ah)
@@ -70,6 +71,6 @@ int		is_optimisable(t_anthill *ah)
 		i++;
 	}
 	if (MIN(slink, plink) > 1)
-		return (1);
+		return (MIN(slink, plink));
 	return (0);
 }
