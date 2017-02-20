@@ -6,7 +6,7 @@
 /*   By: mhaziza <mhaziza@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/14 14:13:28 by mhaziza           #+#    #+#             */
-/*   Updated: 2017/02/20 14:27:21 by mhaziza          ###   ########.fr       */
+/*   Updated: 2017/02/20 15:41:16 by mhaziza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ typedef struct	s_line
 	struct s_line	*next;
 }				t_line;
 
-typedef struct s_ditrib
+typedef struct	s_ditrib
 {
 	int		*ants;
 	int		*cost;
@@ -92,7 +92,9 @@ int				is_optimisable(t_anthill *ah);
 int				init_distrib(t_distrib *distrib, int size);
 int				do_distrib(t_distrib *distrib, int count, int ants);
 int				global_cost(t_distrib *distrib, int count);
+void			get_opti(t_anthill *ah, t_bfs *bfs);
 
+void			print_info_distrib(t_distrib *distrib, int count);
 void			print_info(t_anthill *ah, t_bfs *bfs);
 void			print_all_info(t_anthill *ah);
 void			print_path(t_anthill *ah, t_bfs *bfs);

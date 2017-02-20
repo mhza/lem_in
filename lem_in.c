@@ -6,7 +6,7 @@
 /*   By: mhaziza <mhaziza@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/14 14:15:40 by mhaziza           #+#    #+#             */
-/*   Updated: 2017/02/20 14:46:38 by mhaziza          ###   ########.fr       */
+/*   Updated: 2017/02/20 15:40:39 by mhaziza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,8 @@ int			main(int ac, char **av)
 	t_bfs		bfs;
 
 	if (ac > 2 || (av[1] && ft_strcmp(av[1], "-info")
-						&& ft_strcmp(av[1], "-all")))
-		return (ret_putstr_fd("Usage : ./lem-in [-info][-all] < filename", 2));
+						&& ft_strcmp(av[1], "-opti")))
+		return (ret_putstr_fd("Usage : ./lem-in [-info][-opti] < filename", 2));
 	if (!init_struct(&ah))
 		return (0);
 	if (!get_anthill(&ah))
@@ -87,9 +87,9 @@ int			main(int ac, char **av)
 	print_flow(&ah, bfs.path, bfs.deg[bfs.p]);
 	if (ac == 1)
 		return (free_all(&ah, &bfs, 1));
-	if (!ft_strcmp(av[1], "-info"))
-		print_info(&ah, &bfs);
-	else if (!ft_strcmp(av[1], "-all"))
+	if (!ft_strcmp(av[1], "-opti"))
+		get_opti(&ah, &bfs);
+	else if (!ft_strcmp(av[1], "-info"))
 		print_all_info(&ah);
 	return (free_all(&ah, &bfs, 1));
 }

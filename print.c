@@ -6,61 +6,38 @@
 /*   By: mhaziza <mhaziza@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/18 11:54:40 by mhaziza           #+#    #+#             */
-/*   Updated: 2017/02/20 14:54:34 by mhaziza          ###   ########.fr       */
+/*   Updated: 2017/02/20 15:39:19 by mhaziza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-
 void		print_info(t_anthill *ah, t_bfs *bfs)
 {
-	t_distrib	distrib;
-	int			n;
-	int			count;
-
 	ft_putstr("------------------------------------------------\n");
-	ft_putstr("Cost using only the shortest path is : ");
+	ft_putstr("Steps using the shortest path :\n");
 	ft_putnbr(ah->ants + bfs->deg[bfs->p] - 1);
 	ft_putstr("\n------------------------------------------------\n");
-	ft_putstr("All separated paths from ");
-	ft_putstr(get_room_by_id(ah, ah->id_start));
-	ft_putstr(" to ");
-	ft_putstr(get_room_by_id(ah, ah->id_end));
-	ft_putstr(" are :\n");
+	ft_putstr("All parallel paths from start to finish :\n");
 	print_path(ah, bfs);
+}
 
-	if ((n = is_optimisable(ah)))
-	{
-		init_distrib(&distrib, n);
-		distrib.deg[0] = bfs->deg[bfs->p];
-		distrib.deg[1] = remove_shorter(ah, bfs);
-	}
-	count = 1;
-	while (is_optimisable(ah) && ++count)
-		distrib.deg[count] = remove_shorter(ah, bfs);
+void		print_info_distrib(t_distrib *distrib, int count)
+{
+	int	i;
 
-printf("\n count max (malloc) %i count %i\n", n , count);
-ft_putstr("distrib.deg\n");
-	ft_putints(distrib.deg, count + 1 );
-	do_distrib(&distrib, count + 1, ah->ants);
 	ft_putstr("------------------------------------------------\n");
-	ft_putstr("Respective amount of ants to put in each path : \n");
-	n = -1;
-	while (++n < count + 1)
+	ft_putstr("Distribution of ants in each path :\n");
+	i = -1;
+	while (++i < count + 1)
 	{
-		ft_putnbr(distrib.ants[n]);
+		ft_putnbr(distrib->ants[i]);
 		ft_putchar('\n');
 	}
 	ft_putstr("------------------------------------------------\n");
-	ft_putstr("Cost using this distribution is : ");
-	ft_putnbr(global_cost(&distrib, count));
-	// printf("\nAn optimisation is to put %i ants in first, %i in 2nd, %i in 3rd\n", distrib.ants[0], distrib.ants[1], distrib.ants[2]);
-	// printf("new cost is %i\n", global_cost(&distrib, count));
+	ft_putstr("Total amount of steps with this optimization :\n");
+	ft_putnbr(global_cost(distrib, count));
 	ft_putstr("\n------------------------------------------------\n");
-	free(distrib.ants);
-	free(distrib.cost);
-	free(distrib.deg);
 }
 
 static void	pattern_all(int power, int count)
