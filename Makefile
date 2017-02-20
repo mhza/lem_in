@@ -6,7 +6,7 @@
 #    By: mhaziza <mhaziza@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/02/14 17:16:56 by mhaziza           #+#    #+#              #
-#    Updated: 2017/02/20 12:43:49 by mhaziza          ###   ########.fr        #
+#    Updated: 2017/02/20 18:27:07 by mhaziza          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,6 @@ SRCS	=	lem_in.c \
 			anthill.c \
 			adjacency.c \
 			bfs.c \
-			debug.c \
 			anthill_utils.c \
 			flow.c \
 			opti.c \

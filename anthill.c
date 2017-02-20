@@ -6,7 +6,7 @@
 /*   By: mhaziza <mhaziza@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/14 20:39:03 by mhaziza           #+#    #+#             */
-/*   Updated: 2017/02/19 20:10:03 by mhaziza          ###   ########.fr       */
+/*   Updated: 2017/02/20 18:25:41 by mhaziza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,23 @@ static int		putstr_and_free(t_line *input, int ok, char *ln)
 	if (!ok)
 		free(ln);
 	return (ok);
+}
+
+t_line			*get_rooms(char *ln, t_anthill *ah, t_line *input)
+{
+	if (!ft_strchr(ln, '#'))
+	{
+		ah->nb_rooms += 1;
+		if (!(set_id_rooms(ah, ah->rooms, ln)))
+			return (NULL);
+	}
+	else if (!ft_strcmp(ln, "##start"))
+		ah->id_start = ah->nb_rooms;
+	else if (!ft_strcmp(ln, "##end"))
+		ah->id_end = ah->nb_rooms;
+	input = ft_strreal(input, ln);
+	free(ln);
+	return (input);
 }
 
 int				get_anthill(t_anthill *ah)

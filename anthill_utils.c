@@ -6,11 +6,22 @@
 /*   By: mhaziza <mhaziza@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/16 09:39:41 by mhaziza           #+#    #+#             */
-/*   Updated: 2017/02/19 12:56:34 by mhaziza          ###   ########.fr       */
+/*   Updated: 2017/02/20 18:23:56 by mhaziza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
+
+static char	**free_rooms_if_duplicate(char **tab, int tab_size)
+{
+	int	i;
+
+	i = -1;
+	while (++i < tab_size)
+		free(tab[i]);
+	free(tab);
+	return (NULL);
+}
 
 static char	**realloc_and_check(char **tab, char *neww, int ok)
 {
@@ -19,29 +30,25 @@ static char	**realloc_and_check(char **tab, char *neww, int ok)
 	char			**tab_tmp;
 	int				duplicate;
 
-	tab_size = 0;
+	tab_size = -1;
 	duplicate = 0;
-	while (tab && tab[tab_size])
-		tab_size++;
+	while (tab && tab[++tab_size])
+		if (!ft_strcmp(tab[tab_size], neww))
+			duplicate = 1;
+	if (duplicate && !ok)
+		return (free_rooms_if_duplicate(tab, tab_size));
 	if (!(tab_tmp = (char**)malloc(sizeof(char*) * (tab_size + 2))))
 		return (NULL);
-	i = 0;
-	while (i < tab_size)
-	{
-		if (!ft_strcmp(tab[i], neww))
-			duplicate = 1;
+	i = -1;
+	while (++i < tab_size)
 		tab_tmp[i] = tab[i];
-		i++;
-	}
 	tab_tmp[i] = ft_strdup(neww);
 	tab_tmp[i + 1] = 0;
 	free(tab);
-	if (!duplicate || ok)
-		return (tab_tmp);
-	return (NULL);
+	return (tab_tmp);
 }
 
-static char	**set_id_rooms(t_anthill *ah, char **ids, char *ln)
+char		**set_id_rooms(t_anthill *ah, char **ids, char *ln)
 {
 	char	*name;
 	int		i;
@@ -89,23 +96,6 @@ static char	**set_tube(t_anthill *ah, char **tubes, char **rooms, char *ln)
 	ah->adjacency = set_adjacency(ah->adjacency, id1, id2);
 	ah->tubes = realloc_and_check(tubes, ln, 1);
 	return (ah->tubes);
-}
-
-t_line		*get_rooms(char *ln, t_anthill *ah, t_line *input)
-{
-	if (!ft_strchr(ln, '#'))
-	{
-		ah->nb_rooms += 1;
-		if (!(set_id_rooms(ah, ah->rooms, ln)))
-			return (NULL);
-	}
-	else if (!ft_strcmp(ln, "##start"))
-		ah->id_start = ah->nb_rooms;
-	else if (!ft_strcmp(ln, "##end"))
-		ah->id_end = ah->nb_rooms;
-	input = ft_strreal(input, ln);
-	free(ln);
-	return (input);
 }
 
 t_line		*get_tubes(char *ln, t_anthill *ah, t_line *input)

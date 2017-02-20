@@ -6,7 +6,7 @@
 /*   By: mhaziza <mhaziza@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/14 14:13:28 by mhaziza           #+#    #+#             */
-/*   Updated: 2017/02/20 15:41:16 by mhaziza          ###   ########.fr       */
+/*   Updated: 2017/02/20 18:24:28 by mhaziza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ int				get_id_room(char **ids, char *name);
 char			*get_room_by_id(t_anthill *ah, int id);
 
 t_line			*get_rooms(char *ln, t_anthill *ah, t_line *input);
+char			**set_id_rooms(t_anthill *ah, char **ids, char *ln);
 t_line			*get_tubes(char *ln, t_anthill *ah, t_line *input);
 
 int				init_adjacency_map(t_anthill *ah);
@@ -82,15 +83,9 @@ int				get_top_tmp(t_bfs *bfs, int size);
 int				set_path(t_bfs *bfs);
 void			print_flow(t_anthill *a, int *p, int d);
 
-void			print_debug(t_bfs *bfs, int size);
-void			debug_input(t_anthill *ah);
-void			print_power(t_anthill *ah);
-
 int				remove_shorter(t_anthill *ah, t_bfs *bfs);
 int				is_optimisable(t_anthill *ah);
 
-int				init_distrib(t_distrib *distrib, int size);
-int				do_distrib(t_distrib *distrib, int count, int ants);
 int				global_cost(t_distrib *distrib, int count);
 void			get_opti(t_anthill *ah, t_bfs *bfs);
 
@@ -98,4 +93,5 @@ void			print_info_distrib(t_distrib *distrib, int count);
 void			print_info(t_anthill *ah, t_bfs *bfs);
 void			print_all_info(t_anthill *ah);
 void			print_path(t_anthill *ah, t_bfs *bfs);
+
 #endif

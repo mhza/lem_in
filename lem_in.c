@@ -6,7 +6,7 @@
 /*   By: mhaziza <mhaziza@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/14 14:15:40 by mhaziza           #+#    #+#             */
-/*   Updated: 2017/02/20 17:32:15 by mhaziza          ###   ########.fr       */
+/*   Updated: 2017/02/20 17:51:05 by mhaziza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ int			main(int ac, char **av)
 	else
 		return (free_all(&ah, NULL, 0));
 	if (bfs.deg[bfs.p] < 1)
-		return (1);
+		return (free_all(&ah, &bfs, 1));
 	print_flow(&ah, bfs.path, bfs.deg[bfs.p]);
 	if (ac == 1)
 		return (free_all(&ah, &bfs, 1));
